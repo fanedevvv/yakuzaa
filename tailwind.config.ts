@@ -55,6 +55,7 @@ export default {
         "noxx-purple": "hsl(var(--gradient-purple))",
         "noxx-pink": "hsl(var(--gradient-pink))",
         "noxx-yellow": "hsl(var(--gradient-yellow))",
+        "noxx-red": "hsl(var(--gradient-red))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
