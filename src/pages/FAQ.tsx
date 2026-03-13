@@ -80,12 +80,7 @@ const FAQ = () => {
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="space-y-3">
               {faqs.map((faq, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                >
+                <AnimatedSection key={i} delay={i * 0.05}>
                   <AccordionItem value={`faq-${i}`} className="glass-card border-border/30 px-6 rounded-xl">
                     <AccordionTrigger className="text-foreground hover:no-underline text-left">
                       {faq.q}
@@ -94,7 +89,7 @@ const FAQ = () => {
                       {faq.a}
                     </AccordionContent>
                   </AccordionItem>
-                </motion.div>
+                </AnimatedSection>
               ))}
             </Accordion>
 
