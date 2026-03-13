@@ -55,27 +55,28 @@ const Partners = () => {
 
           <AnimatedSection direction="right" delay={0.15}>
             <div className="max-w-3xl mx-auto mb-16">
-            <div className="glass-card p-8">
-              <div className="flex items-center gap-4 mb-4">
-                <img src="https://i.ibb.co/qMP6B9Qc/eef0b18c703b4e9bcf4ba5abdae4c4b2.webp" alt="NoxxBot" className="w-12 h-12 rounded-full" />
-                <h3 className="font-display font-bold text-foreground text-xl">NoxxBot</h3>
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Noxx 🛡️ | Where commands meet creativity. Your all-in-one Discord guardian: advanced antinuke protection, robust security, moderation tools, and more. Designed to keep your server safe, active, and stress-free 24/7.
-              </p>
-              <p className="text-sm text-muted-foreground mb-4">Dashboard: https://dashboard.noxxbot.com/<br />© Xyron Development, 2026. All rights reserved.</p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {["Discord", "Multifunctional", "Dashboard", "Yakuza brother"].map((tag) => (
-                  <span key={tag} className="text-xs px-3 py-1 rounded-full bg-muted border border-border/50 text-muted-foreground">{tag}</span>
-                ))}
-              </div>
-              <div className="flex gap-3">
-                <a href="https://noxxbot.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2 rounded-lg bg-muted border border-border text-sm text-foreground font-medium hover:bg-muted/80 transition-colors">
-                  <ExternalLink className="w-4 h-4" /> Website
-                </a>
-                <a href="https://discord.gg/4Jp78WQw5j" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2 rounded-lg bg-[hsl(235,86%,65%)]/20 border border-[hsl(235,86%,65%)]/30 text-sm text-[hsl(235,86%,65%)] font-medium hover:bg-[hsl(235,86%,65%)]/30 transition-colors">
-                  Discord
-                </a>
+              <div className="glass-card p-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <img src="https://i.ibb.co/qMP6B9Qc/eef0b18c703b4e9bcf4ba5abdae4c4b2.webp" alt="NoxxBot" className="w-12 h-12 rounded-full" />
+                  <h3 className="font-display font-bold text-foreground text-xl">NoxxBot</h3>
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  Noxx 🛡️ | Where commands meet creativity. Your all-in-one Discord guardian: advanced antinuke protection, robust security, moderation tools, and more. Designed to keep your server safe, active, and stress-free 24/7.
+                </p>
+                <p className="text-sm text-muted-foreground mb-4">Dashboard: https://dashboard.noxxbot.com/<br />© Xyron Development, 2026. All rights reserved.</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {["Discord", "Multifunctional", "Dashboard", "Yakuza brother"].map((tag) => (
+                    <span key={tag} className="text-xs px-3 py-1 rounded-full bg-muted border border-border/50 text-muted-foreground">{tag}</span>
+                  ))}
+                </div>
+                <div className="flex gap-3">
+                  <a href="https://noxxbot.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2 rounded-lg bg-muted border border-border text-sm text-foreground font-medium hover:bg-muted/80 transition-colors">
+                    <ExternalLink className="w-4 h-4" /> Website
+                  </a>
+                  <a href="https://discord.gg/4Jp78WQw5j" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-5 py-2 rounded-lg bg-[hsl(235,86%,65%)]/20 border border-[hsl(235,86%,65%)]/30 text-sm text-[hsl(235,86%,65%)] font-medium hover:bg-[hsl(235,86%,65%)]/30 transition-colors">
+                    Discord
+                  </a>
+                </div>
               </div>
             </div>
           </AnimatedSection>
