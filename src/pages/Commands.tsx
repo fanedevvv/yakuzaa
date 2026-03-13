@@ -1,230 +1,135 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronDown, Crown, Shield, Coins, Gavel, Music, Gamepad2, Wrench, TrendingUp, Gift, MessageSquare, Heart, ScrollText } from "lucide-react";
+import { Search, ChevronDown, Crown, Shield, Coins, Gavel, Music, Gamepad2, Wrench, TrendingUp, Gift, MessageSquare, Heart, ScrollText, ImageIcon, Bot, Users, Swords, Zap, Radio, Bell, Lock, Megaphone, Cog, Loader2, RefreshCw } from "lucide-react";
 import Layout from "@/components/Layout";
+import { useDiscordBotCommands, BotCommand } from "@/hooks/useDiscordBotCommands";
 
-interface Command {
-  name: string;
-  desc: string;
-  usage?: string;
-}
+// Map parentName to category info
+const categoryMeta: Record<string, { icon: any; title: string; desc: string; color: string }> = {
+  automod: { icon: Shield, title: "AutoMod", desc: "Automatic moderation rules", color: "bg-blue-500/20 text-blue-400" },
+  antilink: { icon: Shield, title: "Anti-Link", desc: "Block unwanted links", color: "bg-blue-500/20 text-blue-400" },
+  antinuke: { icon: Lock, title: "Anti-Nuke", desc: "Server nuke protection system", color: "bg-red-500/20 text-red-400" },
+  antiscam: { icon: Shield, title: "Anti-Scam", desc: "Scam link detection", color: "bg-blue-500/20 text-blue-400" },
+  economy: { icon: Coins, title: "Economy", desc: "Currency, gambling & banking", color: "bg-amber-500/20 text-amber-400" },
+  family: { icon: Heart, title: "Family", desc: "Marriage, adoption & family system", color: "bg-rose-500/20 text-rose-400" },
+  fun: { icon: Gamepad2, title: "Fun", desc: "Entertainment & interaction commands", color: "bg-pink-500/20 text-pink-400" },
+  hack: { icon: Gamepad2, title: "Fun", desc: "Entertainment & interaction commands", color: "bg-pink-500/20 text-pink-400" },
+  images: { icon: ImageIcon, title: "Images", desc: "Image manipulation & memes", color: "bg-violet-500/20 text-violet-400" },
+  music: { icon: Music, title: "Music", desc: "Music playback & queue control", color: "bg-green-500/20 text-green-400" },
+  giveaway: { icon: Gift, title: "Giveaways", desc: "Host and manage giveaways", color: "bg-purple-500/20 text-purple-400" },
+  ticket: { icon: MessageSquare, title: "Tickets", desc: "Support ticket system", color: "bg-indigo-500/20 text-indigo-400" },
+  modmail: { icon: MessageSquare, title: "Modmail", desc: "Private moderation mail system", color: "bg-indigo-500/20 text-indigo-400" },
+  ban: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  kick: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  unban: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  untimeout: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  warn: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  timeout: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  purge: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  role: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  roleall: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  slowmode: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  channel: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  lockdown: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  nick: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  snipe: { icon: Gavel, title: "Moderation", desc: "Server moderation & management", color: "bg-red-500/20 text-red-400" },
+  leaderboard: { icon: TrendingUp, title: "Leveling", desc: "XP & leveling system", color: "bg-cyan-500/20 text-cyan-400" },
+  rank: { icon: TrendingUp, title: "Leveling", desc: "XP & leveling system", color: "bg-cyan-500/20 text-cyan-400" },
+  leveling: { icon: TrendingUp, title: "Leveling", desc: "XP & leveling system", color: "bg-cyan-500/20 text-cyan-400" },
+  "level-roles": { icon: TrendingUp, title: "Leveling", desc: "XP & leveling system", color: "bg-cyan-500/20 text-cyan-400" },
+  voiceleveling: { icon: TrendingUp, title: "Leveling", desc: "XP & leveling system", color: "bg-cyan-500/20 text-cyan-400" },
+  bot: { icon: Bot, title: "Bot Info", desc: "Bot information & utilities", color: "bg-orange-500/20 text-orange-400" },
+  help: { icon: Bot, title: "Bot Info", desc: "Bot information & utilities", color: "bg-orange-500/20 text-orange-400" },
+  serverinfo: { icon: Bot, title: "Bot Info", desc: "Bot information & utilities", color: "bg-orange-500/20 text-orange-400" },
+  tools: { icon: Wrench, title: "Tools", desc: "Utilities, converters & lookups", color: "bg-orange-500/20 text-orange-400" },
+  utilities: { icon: Wrench, title: "Tools", desc: "Utilities, converters & lookups", color: "bg-orange-500/20 text-orange-400" },
+  generate: { icon: Wrench, title: "Tools", desc: "Utilities, converters & lookups", color: "bg-orange-500/20 text-orange-400" },
+  steal: { icon: Wrench, title: "Tools", desc: "Utilities, converters & lookups", color: "bg-orange-500/20 text-orange-400" },
+  embed: { icon: Wrench, title: "Tools", desc: "Utilities, converters & lookups", color: "bg-orange-500/20 text-orange-400" },
+  reminder: { icon: Wrench, title: "Tools", desc: "Utilities, converters & lookups", color: "bg-orange-500/20 text-orange-400" },
+  "welcome-message": { icon: Bell, title: "Welcome & Goodbye", desc: "Greet and farewell messages", color: "bg-rose-500/20 text-rose-400" },
+  logs: { icon: ScrollText, title: "Logging", desc: "Server event logging", color: "bg-teal-500/20 text-teal-400" },
+  invite: { icon: Users, title: "Invites", desc: "Invite tracking system", color: "bg-emerald-500/20 text-emerald-400" },
+  poll: { icon: Megaphone, title: "Polls", desc: "Create and manage polls", color: "bg-sky-500/20 text-sky-400" },
+  afk: { icon: Zap, title: "AFK", desc: "Away from keyboard status", color: "bg-yellow-500/20 text-yellow-400" },
+  uptime: { icon: Radio, title: "Uptime Monitor", desc: "URL uptime monitoring", color: "bg-emerald-500/20 text-emerald-400" },
+  guildredeem: { icon: Crown, title: "Premium", desc: "Premium features & activation", color: "bg-yellow-500/20 text-yellow-400" },
+  redeem: { icon: Crown, title: "Premium", desc: "Premium features & activation", color: "bg-yellow-500/20 text-yellow-400" },
+  "premium-test": { icon: Crown, title: "Premium", desc: "Premium features & activation", color: "bg-yellow-500/20 text-yellow-400" },
+  rep: { icon: Heart, title: "Reputation", desc: "User reputation system", color: "bg-rose-500/20 text-rose-400" },
+  "rep-stats": { icon: Heart, title: "Reputation", desc: "User reputation system", color: "bg-rose-500/20 text-rose-400" },
+  imagine: { icon: Zap, title: "AI", desc: "AI-powered features", color: "bg-purple-500/20 text-purple-400" },
+  "games-multiplayer": { icon: Swords, title: "Games", desc: "Mini-games & activities", color: "bg-pink-500/20 text-pink-400" },
+  "games-singleplayer": { icon: Swords, title: "Games", desc: "Mini-games & activities", color: "bg-pink-500/20 text-pink-400" },
+  booster: { icon: Zap, title: "Configuration", desc: "Server setup & config", color: "bg-slate-500/20 text-slate-400" },
+  counting: { icon: Cog, title: "Configuration", desc: "Server setup & config", color: "bg-slate-500/20 text-slate-400" },
+  guess: { icon: Cog, title: "Configuration", desc: "Server setup & config", color: "bg-slate-500/20 text-slate-400" },
+  "join-ping": { icon: Cog, title: "Configuration", desc: "Server setup & config", color: "bg-slate-500/20 text-slate-400" },
+  "join-to-create": { icon: Cog, title: "Configuration", desc: "Server setup & config", color: "bg-slate-500/20 text-slate-400" },
+  "reaction-role": { icon: Cog, title: "Configuration", desc: "Server setup & config", color: "bg-slate-500/20 text-slate-400" },
+  "sticky-message": { icon: Cog, title: "Configuration", desc: "Server setup & config", color: "bg-slate-500/20 text-slate-400" },
+  suggestion: { icon: Megaphone, title: "Suggestions", desc: "User suggestion system", color: "bg-sky-500/20 text-sky-400" },
+  twitch: { icon: Radio, title: "Notifications", desc: "Twitch & YouTube alerts", color: "bg-purple-500/20 text-purple-400" },
+  youtube: { icon: Radio, title: "Notifications", desc: "Twitch & YouTube alerts", color: "bg-purple-500/20 text-purple-400" },
+  backup: { icon: Shield, title: "Backup", desc: "Server backup & restore", color: "bg-teal-500/20 text-teal-400" },
+  avatar: { icon: ImageIcon, title: "Images", desc: "Image manipulation & memes", color: "bg-violet-500/20 text-violet-400" },
+  uwulock: { icon: Gamepad2, title: "Fun", desc: "Entertainment & interaction commands", color: "bg-pink-500/20 text-pink-400" },
+};
 
-interface Category {
-  icon: any;
+const defaultMeta = { icon: Cog, title: "Other", desc: "Miscellaneous commands", color: "bg-slate-500/20 text-slate-400" };
+
+interface GroupedCategory {
   title: string;
   desc: string;
+  icon: any;
   color: string;
-  commands: Command[];
+  commands: BotCommand[];
 }
 
-const categories: Category[] = [
-  {
-    icon: Crown, title: "Premium", desc: "Exclusive premium commands and features", color: "bg-yellow-500/20 text-yellow-400",
-    commands: [
-      { name: "/premium info", desc: "View your premium status and benefits", usage: "/premium info" },
-      { name: "/premium activate", desc: "Activate a premium key on your server", usage: "/premium activate <key>" },
-      { name: "/premium transfer", desc: "Transfer premium to another server", usage: "/premium transfer <server_id>" },
-      { name: "/customembed", desc: "Create fully customizable embeds (premium only)", usage: "/customembed <title> <description> [color] [image]" },
-      { name: "/autorole premium", desc: "Set up premium auto-roles for new members", usage: "/autorole premium <role>" },
-    ],
-  },
-  {
-    icon: Shield, title: "Automod", desc: "Automatic moderation tools to keep your server safe", color: "bg-blue-500/20 text-blue-400",
-    commands: [
-      { name: "/automod enable", desc: "Enable the auto-moderation system", usage: "/automod enable" },
-      { name: "/automod disable", desc: "Disable the auto-moderation system", usage: "/automod disable" },
-      { name: "/automod antispam", desc: "Configure anti-spam settings", usage: "/automod antispam <threshold> <action>" },
-      { name: "/automod antilink", desc: "Toggle anti-link protection", usage: "/automod antilink <on/off> [whitelist]" },
-      { name: "/automod badwords", desc: "Manage the bad words filter list", usage: "/automod badwords <add/remove/list> [word]" },
-      { name: "/automod caps", desc: "Set caps lock spam protection", usage: "/automod caps <percentage> <action>" },
-      { name: "/automod mentions", desc: "Limit mass mentions in messages", usage: "/automod mentions <max_count> <action>" },
-      { name: "/automod invites", desc: "Block Discord invite links", usage: "/automod invites <on/off>" },
-      { name: "/automod config", desc: "View current automod configuration", usage: "/automod config" },
-    ],
-  },
-  {
-    icon: Coins, title: "Economy", desc: "Server economy and currency system", color: "bg-amber-500/20 text-amber-400",
-    commands: [
-      { name: "/balance", desc: "Check your or another user's balance", usage: "/balance [user]" },
-      { name: "/daily", desc: "Claim your daily coins reward", usage: "/daily" },
-      { name: "/weekly", desc: "Claim your weekly coins reward", usage: "/weekly" },
-      { name: "/work", desc: "Work to earn coins", usage: "/work" },
-      { name: "/rob", desc: "Attempt to rob another user", usage: "/rob <user>" },
-      { name: "/deposit", desc: "Deposit coins into your bank", usage: "/deposit <amount>" },
-      { name: "/withdraw", desc: "Withdraw coins from your bank", usage: "/withdraw <amount>" },
-      { name: "/pay", desc: "Send coins to another user", usage: "/pay <user> <amount>" },
-      { name: "/shop", desc: "Browse the server shop", usage: "/shop" },
-      { name: "/buy", desc: "Buy an item from the shop", usage: "/buy <item>" },
-      { name: "/inventory", desc: "View your inventory", usage: "/inventory [user]" },
-      { name: "/leaderboard economy", desc: "View the richest users", usage: "/leaderboard economy" },
-      { name: "/slots", desc: "Play the slot machine", usage: "/slots <bet>" },
-      { name: "/coinflip", desc: "Gamble with a coin flip", usage: "/coinflip <bet> <heads/tails>" },
-    ],
-  },
-  {
-    icon: Gavel, title: "Moderation", desc: "Server moderation and management", color: "bg-red-500/20 text-red-400",
-    commands: [
-      { name: "/ban", desc: "Ban a user from the server", usage: "/ban <user> [reason] [delete_days]" },
-      { name: "/unban", desc: "Unban a user from the server", usage: "/unban <user_id>" },
-      { name: "/kick", desc: "Kick a user from the server", usage: "/kick <user> [reason]" },
-      { name: "/mute", desc: "Mute a user (timeout)", usage: "/mute <user> <duration> [reason]" },
-      { name: "/unmute", desc: "Unmute a user", usage: "/unmute <user>" },
-      { name: "/warn", desc: "Warn a user", usage: "/warn <user> <reason>" },
-      { name: "/warnings", desc: "View warnings for a user", usage: "/warnings <user>" },
-      { name: "/clearwarns", desc: "Clear all warnings for a user", usage: "/clearwarns <user>" },
-      { name: "/purge", desc: "Delete multiple messages at once", usage: "/purge <amount> [user]" },
-      { name: "/slowmode", desc: "Set channel slowmode", usage: "/slowmode <seconds>" },
-      { name: "/lock", desc: "Lock a channel", usage: "/lock [channel] [reason]" },
-      { name: "/unlock", desc: "Unlock a channel", usage: "/unlock [channel]" },
-      { name: "/nuke", desc: "Clone and delete a channel (reset)", usage: "/nuke [channel]" },
-      { name: "/role", desc: "Add or remove a role from a user", usage: "/role <add/remove> <user> <role>" },
-    ],
-  },
-  {
-    icon: Music, title: "Music", desc: "Music playback and control", color: "bg-green-500/20 text-green-400",
-    commands: [
-      { name: "/play", desc: "Play a song or add it to the queue", usage: "/play <song/url>" },
-      { name: "/pause", desc: "Pause the current song", usage: "/pause" },
-      { name: "/resume", desc: "Resume playback", usage: "/resume" },
-      { name: "/skip", desc: "Skip the current song", usage: "/skip" },
-      { name: "/stop", desc: "Stop playback and clear the queue", usage: "/stop" },
-      { name: "/queue", desc: "View the current music queue", usage: "/queue" },
-      { name: "/nowplaying", desc: "Show the currently playing song", usage: "/nowplaying" },
-      { name: "/volume", desc: "Adjust the playback volume", usage: "/volume <1-100>" },
-      { name: "/loop", desc: "Toggle loop mode (song/queue/off)", usage: "/loop <song/queue/off>" },
-      { name: "/shuffle", desc: "Shuffle the current queue", usage: "/shuffle" },
-      { name: "/seek", desc: "Seek to a position in the song", usage: "/seek <time>" },
-      { name: "/lyrics", desc: "Get lyrics for the current song", usage: "/lyrics [song]" },
-      { name: "/filter", desc: "Apply audio filters (bass, nightcore, etc.)", usage: "/filter <filter_name>" },
-      { name: "/disconnect", desc: "Disconnect the bot from voice", usage: "/disconnect" },
-    ],
-  },
-  {
-    icon: Gamepad2, title: "Fun", desc: "Entertainment and interactive commands", color: "bg-pink-500/20 text-pink-400",
-    commands: [
-      { name: "/meme", desc: "Get a random meme from Reddit", usage: "/meme" },
-      { name: "/joke", desc: "Get a random joke", usage: "/joke" },
-      { name: "/8ball", desc: "Ask the magic 8-ball a question", usage: "/8ball <question>" },
-      { name: "/rps", desc: "Play rock-paper-scissors", usage: "/rps <rock/paper/scissors>" },
-      { name: "/trivia", desc: "Answer a trivia question", usage: "/trivia [category]" },
-      { name: "/roast", desc: "Roast a user (fun)", usage: "/roast <user>" },
-      { name: "/ship", desc: "Check love compatibility", usage: "/ship <user1> <user2>" },
-      { name: "/rate", desc: "Rate something out of 10", usage: "/rate <thing>" },
-      { name: "/say", desc: "Make the bot say something", usage: "/say <message>" },
-      { name: "/embed", desc: "Send a message as an embed", usage: "/embed <message>" },
-      { name: "/poll", desc: "Create a poll", usage: "/poll <question> <option1> <option2> [option3]" },
-      { name: "/hack", desc: "Fake hack a user (joke)", usage: "/hack <user>" },
-    ],
-  },
-  {
-    icon: Wrench, title: "Utility", desc: "General utility and helper commands", color: "bg-orange-500/20 text-orange-400",
-    commands: [
-      { name: "/help", desc: "Show bot help and command list", usage: "/help [command]" },
-      { name: "/ping", desc: "Check bot latency", usage: "/ping" },
-      { name: "/serverinfo", desc: "Display server information", usage: "/serverinfo" },
-      { name: "/userinfo", desc: "Display user information", usage: "/userinfo [user]" },
-      { name: "/avatar", desc: "Get a user's avatar", usage: "/avatar [user]" },
-      { name: "/banner", desc: "Get a user's banner", usage: "/banner [user]" },
-      { name: "/roleinfo", desc: "Display info about a role", usage: "/roleinfo <role>" },
-      { name: "/channelinfo", desc: "Display info about a channel", usage: "/channelinfo [channel]" },
-      { name: "/membercount", desc: "Show total member count", usage: "/membercount" },
-      { name: "/invite", desc: "Get the bot invite link", usage: "/invite" },
-      { name: "/botinfo", desc: "Show bot stats and info", usage: "/botinfo" },
-      { name: "/snipe", desc: "Recover last deleted message", usage: "/snipe [channel]" },
-      { name: "/afk", desc: "Set your AFK status", usage: "/afk [reason]" },
-      { name: "/remind", desc: "Set a reminder", usage: "/remind <time> <message>" },
-      { name: "/translate", desc: "Translate text to another language", usage: "/translate <language> <text>" },
-    ],
-  },
-  {
-    icon: TrendingUp, title: "Leveling", desc: "XP and level system commands", color: "bg-cyan-500/20 text-cyan-400",
-    commands: [
-      { name: "/rank", desc: "View your or another user's rank card", usage: "/rank [user]" },
-      { name: "/leaderboard xp", desc: "View the XP leaderboard", usage: "/leaderboard xp" },
-      { name: "/setlevel", desc: "Set a user's level (admin)", usage: "/setlevel <user> <level>" },
-      { name: "/setxp", desc: "Set a user's XP (admin)", usage: "/setxp <user> <xp>" },
-      { name: "/resetxp", desc: "Reset a user's XP and level", usage: "/resetxp <user>" },
-      { name: "/xp config", desc: "Configure XP gain settings", usage: "/xp config <min> <max> <cooldown>" },
-      { name: "/levelroles", desc: "Set roles awarded at certain levels", usage: "/levelroles <add/remove/list> [level] [role]" },
-      { name: "/xp enable", desc: "Enable/disable the leveling system", usage: "/xp enable <on/off>" },
-      { name: "/xp channel", desc: "Set channels where XP can be earned", usage: "/xp channel <add/remove> <channel>" },
-    ],
-  },
-  {
-    icon: Gift, title: "Giveaways", desc: "Host and manage server giveaways", color: "bg-purple-500/20 text-purple-400",
-    commands: [
-      { name: "/giveaway start", desc: "Start a new giveaway", usage: "/giveaway start <duration> <winners> <prize> [channel]" },
-      { name: "/giveaway end", desc: "End a giveaway early", usage: "/giveaway end <message_id>" },
-      { name: "/giveaway reroll", desc: "Reroll the winner of a giveaway", usage: "/giveaway reroll <message_id>" },
-      { name: "/giveaway pause", desc: "Pause an active giveaway", usage: "/giveaway pause <message_id>" },
-      { name: "/giveaway resume", desc: "Resume a paused giveaway", usage: "/giveaway resume <message_id>" },
-      { name: "/giveaway list", desc: "List all active giveaways", usage: "/giveaway list" },
-      { name: "/giveaway delete", desc: "Delete a giveaway", usage: "/giveaway delete <message_id>" },
-    ],
-  },
-  {
-    icon: MessageSquare, title: "Tickets", desc: "Support ticket system", color: "bg-indigo-500/20 text-indigo-400",
-    commands: [
-      { name: "/ticket setup", desc: "Set up the ticket system in a channel", usage: "/ticket setup <channel> [category]" },
-      { name: "/ticket close", desc: "Close the current ticket", usage: "/ticket close [reason]" },
-      { name: "/ticket add", desc: "Add a user to the current ticket", usage: "/ticket add <user>" },
-      { name: "/ticket remove", desc: "Remove a user from the current ticket", usage: "/ticket remove <user>" },
-      { name: "/ticket rename", desc: "Rename the current ticket", usage: "/ticket rename <name>" },
-      { name: "/ticket claim", desc: "Claim a ticket as a staff member", usage: "/ticket claim" },
-      { name: "/ticket transcript", desc: "Save a transcript of the ticket", usage: "/ticket transcript" },
-      { name: "/ticket config", desc: "Configure ticket system settings", usage: "/ticket config" },
-    ],
-  },
-  {
-    icon: Heart, title: "Welcome", desc: "Welcome and goodbye messages", color: "bg-rose-500/20 text-rose-400",
-    commands: [
-      { name: "/welcome channel", desc: "Set the welcome message channel", usage: "/welcome channel <channel>" },
-      { name: "/welcome message", desc: "Customize the welcome message", usage: "/welcome message <message>" },
-      { name: "/welcome image", desc: "Toggle welcome card image", usage: "/welcome image <on/off>" },
-      { name: "/welcome test", desc: "Test the welcome message", usage: "/welcome test" },
-      { name: "/welcome enable", desc: "Enable/disable welcome messages", usage: "/welcome enable <on/off>" },
-      { name: "/goodbye channel", desc: "Set the goodbye message channel", usage: "/goodbye channel <channel>" },
-      { name: "/goodbye message", desc: "Customize the goodbye message", usage: "/goodbye message <message>" },
-      { name: "/goodbye enable", desc: "Enable/disable goodbye messages", usage: "/goodbye enable <on/off>" },
-      { name: "/goodbye test", desc: "Test the goodbye message", usage: "/goodbye test" },
-      { name: "/autorole", desc: "Set roles given automatically on join", usage: "/autorole <add/remove/list> [role]" },
-    ],
-  },
-  {
-    icon: ScrollText, title: "Logging", desc: "Server logging and audit system", color: "bg-teal-500/20 text-teal-400",
-    commands: [
-      { name: "/logs enable", desc: "Enable the logging system", usage: "/logs enable" },
-      { name: "/logs disable", desc: "Disable the logging system", usage: "/logs disable" },
-      { name: "/logs channel", desc: "Set the log channel", usage: "/logs channel <channel>" },
-      { name: "/logs events", desc: "Choose which events to log", usage: "/logs events <event> <on/off>" },
-      { name: "/logs ignore", desc: "Ignore a channel or role from logs", usage: "/logs ignore <channel/role>" },
-      { name: "/logs config", desc: "View current logging configuration", usage: "/logs config" },
-      { name: "/modlogs", desc: "View moderation logs for a user", usage: "/modlogs <user>" },
-    ],
-  },
-];
+function groupCommands(commands: BotCommand[]): GroupedCategory[] {
+  const groups: Record<string, GroupedCategory> = {};
+
+  for (const cmd of commands) {
+    const meta = categoryMeta[cmd.parentName] || defaultMeta;
+    const key = meta.title;
+
+    if (!groups[key]) {
+      groups[key] = { title: meta.title, desc: meta.desc, icon: meta.icon, color: meta.color, commands: [] };
+    }
+    groups[key].commands.push(cmd);
+  }
+
+  // Sort categories by command count descending
+  return Object.values(groups).sort((a, b) => b.commands.length - a.commands.length);
+}
 
 const Commands = () => {
+  const { data, isLoading, refetch } = useDiscordBotCommands();
   const [search, setSearch] = useState("");
   const [openCategory, setOpenCategory] = useState<string | null>(null);
 
-  const filtered = categories.filter((c) => {
-    const q = search.toLowerCase();
-    return (
-      c.title.toLowerCase().includes(q) ||
-      c.desc.toLowerCase().includes(q) ||
-      c.commands.some((cmd) => cmd.name.toLowerCase().includes(q) || cmd.desc.toLowerCase().includes(q))
-    );
-  });
+  const categories = useMemo(() => {
+    if (!data?.commands) return [];
+    return groupCommands(data.commands);
+  }, [data]);
 
-  const getFilteredCommands = (cat: Category) => {
-    if (!search) return cat.commands;
+  const filtered = useMemo(() => {
+    if (!search) return categories;
     const q = search.toLowerCase();
-    if (cat.title.toLowerCase().includes(q) || cat.desc.toLowerCase().includes(q)) return cat.commands;
-    return cat.commands.filter((cmd) => cmd.name.toLowerCase().includes(q) || cmd.desc.toLowerCase().includes(q));
-  };
+    return categories
+      .map((cat) => {
+        const matchesCat = cat.title.toLowerCase().includes(q) || cat.desc.toLowerCase().includes(q);
+        const matchedCmds = cat.commands.filter(
+          (cmd) => cmd.name.toLowerCase().includes(q) || cmd.desc.toLowerCase().includes(q)
+        );
+        if (matchesCat) return cat;
+        if (matchedCmds.length > 0) return { ...cat, commands: matchedCmds };
+        return null;
+      })
+      .filter(Boolean) as GroupedCategory[];
+  }, [categories, search]);
 
-  const totalCommands = categories.reduce((sum, c) => sum + c.commands.length, 0);
+  const totalCommands = data?.totalFlattened ?? 0;
 
   return (
     <Layout>
@@ -237,11 +142,21 @@ const Commands = () => {
             Commands
           </h1>
           <p className="text-center text-muted-foreground mb-1 text-sm">
-            {totalCommands} commands across {categories.length} categories
+            {isLoading ? "Loading..." : `${totalCommands} commands across ${categories.length} categories`}
           </p>
-          <p className="text-center text-muted-foreground mb-8 text-xs">
-            All commands use slash commands (/)
+          <p className="text-center text-muted-foreground mb-2 text-xs">
+            Synced live from Discord API • All slash commands (/)
           </p>
+
+          <div className="flex justify-center mb-6">
+            <button
+              onClick={() => refetch()}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted text-sm text-foreground hover:bg-muted/80 transition-colors"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`} />
+              Refresh
+            </button>
+          </div>
 
           {/* Search */}
           <div className="relative mb-8">
@@ -255,11 +170,14 @@ const Commands = () => {
             />
           </div>
 
-          {/* Categories */}
-          <div className="space-y-3">
-            {filtered.map((cat, i) => {
-              const cmds = getFilteredCommands(cat);
-              return (
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center py-20 gap-3">
+              <Loader2 className="w-8 h-8 text-noxx-red animate-spin" />
+              <p className="text-muted-foreground text-sm">Loading commands from Discord...</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {filtered.map((cat, i) => (
                 <motion.div
                   key={cat.title}
                   initial={{ opacity: 0, y: 10 }}
@@ -277,7 +195,7 @@ const Commands = () => {
                       <div className="flex items-center gap-2">
                         <h3 className="font-display font-semibold text-foreground">{cat.title}</h3>
                         <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                          {cmds.length}
+                          {cat.commands.length}
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground truncate">{cat.desc}</p>
@@ -298,7 +216,7 @@ const Commands = () => {
                         className="overflow-hidden"
                       >
                         <div className="mt-1 p-3 rounded-xl bg-card/40 border border-border/30 space-y-1">
-                          {cmds.map((cmd) => (
+                          {cat.commands.map((cmd) => (
                             <div
                               key={cmd.name}
                               className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 p-3 rounded-lg hover:bg-muted/30 transition-colors"
@@ -317,13 +235,13 @@ const Commands = () => {
                     )}
                   </AnimatePresence>
                 </motion.div>
-              );
-            })}
+              ))}
 
-            {filtered.length === 0 && (
-              <p className="text-center text-muted-foreground py-8">No commands found for "{search}"</p>
-            )}
-          </div>
+              {filtered.length === 0 && (
+                <p className="text-center text-muted-foreground py-8">No commands found for "{search}"</p>
+              )}
+            </div>
+          )}
         </div>
       </section>
     </Layout>
