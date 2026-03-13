@@ -9,6 +9,7 @@ import Partners from "./pages/Partners.tsx";
 import News from "./pages/News.tsx";
 import Devs from "./pages/Devs.tsx";
 import Support from "./pages/Support.tsx";
+import F34R from "./pages/F34R.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,9 @@ const App = () => (
           <Route path="/news" element={<News />} />
           <Route path="/devs" element={<Devs />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/f34r" element={<F34R />} />
+          <Route path="/info" element={<NotFound />} />
+          <Route path="/community" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
