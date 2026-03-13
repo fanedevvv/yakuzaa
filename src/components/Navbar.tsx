@@ -220,7 +220,7 @@ const Navbar = () => {
             to="/admin"
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red/10 text-noxx-red border border-noxx-red/30 text-sm font-medium hover:bg-noxx-red/20 transition-colors"
           >
-            <Users className="w-4 h-4" />
+            
             {user ? "Staff Panel" : "Staff Login"}
           </Link>
           <a
