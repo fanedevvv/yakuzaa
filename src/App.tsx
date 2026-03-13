@@ -10,6 +10,8 @@ import News from "./pages/News.tsx";
 import Devs from "./pages/Devs.tsx";
 import Support from "./pages/Support.tsx";
 import F34R from "./pages/F34R.tsx";
+import Features from "./pages/Features.tsx";
+import Status from "./pages/Status.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
