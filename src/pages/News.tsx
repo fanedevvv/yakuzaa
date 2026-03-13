@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 import { supabase } from "@/integrations/supabase/client";
 
 const fallbackNews = [
