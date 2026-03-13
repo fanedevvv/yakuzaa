@@ -43,7 +43,9 @@ const Support = () => {
             className="flex flex-col items-center gap-4"
           >
             <a
-              href="#"
+              href="https://discord.gg/a9Kea3ymC7"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-muted border border-border text-foreground font-semibold hover:bg-muted/80 transition-colors"
             >
               <MessageSquare className="w-5 h-5" />
