@@ -125,13 +125,22 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-2">
-          <a
-            href="#"
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red text-foreground text-sm font-medium hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20"
+            >
+              <Shield className="w-4 h-4" />
+              Admin
+            </Link>
+          )}
+          <Link
+            to={user ? "/admin" : "/admin"}
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red/10 text-noxx-red border border-noxx-red/30 text-sm font-medium hover:bg-noxx-red/20 transition-colors"
           >
             <Users className="w-4 h-4" />
-            Staff Login
-          </a>
+            {user ? "Staff Panel" : "Staff Login"}
+          </Link>
           <a
             href="#"
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-muted text-foreground border border-border text-sm font-medium hover:bg-muted/80 transition-colors"
