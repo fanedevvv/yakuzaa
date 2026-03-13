@@ -67,16 +67,12 @@ const EasyRules = () => {
           {/* Rules */}
           <div className="space-y-4 mb-12">
             {rules.map((rule, i) => (
-              <motion.div
-                key={rule.title}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-                className="glass-card p-6"
-              >
-                <h3 className="font-display font-bold text-foreground text-lg mb-2">{rule.title}</h3>
-                <p className="text-sm text-muted-foreground">{rule.desc}</p>
-              </motion.div>
+              <AnimatedSection key={rule.title} delay={i * 0.05}>
+                <div className="glass-card p-6">
+                  <h3 className="font-display font-bold text-foreground text-lg mb-2">{rule.title}</h3>
+                  <p className="text-sm text-muted-foreground">{rule.desc}</p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
 
