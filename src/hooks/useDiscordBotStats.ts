@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 
 export interface DiscordBotStats {
   bot: {
@@ -30,11 +29,28 @@ export const useDiscordBotStats = () => {
   return useQuery<DiscordBotStats>({
     queryKey: ["discord-bot-stats"],
     queryFn: async () => {
-      const { data, error } = await supabase.functions.invoke("discord-bot-stats");
-      if (error) throw error;
-      return data as DiscordBotStats;
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/discord-bot-stats`, {
+          method: "GET",
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Stats request failed (${response.status}): ${errorText}`);
+        }
+
+        return (await response.json()) as DiscordBotStats;
+      } finally {
+        clearTimeout(timeout);
+      }
     },
-    refetchInterval: 60000, // refresh every 60s
+    networkMode: "always",
+    retry: 1,
+    refetchInterval: 60000,
     staleTime: 30000,
   });
 };
