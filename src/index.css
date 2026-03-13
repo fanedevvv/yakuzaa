@@ -119,7 +119,7 @@
 
   .section-label {
     @apply text-xs font-semibold tracking-[0.2em] uppercase;
-    color: hsl(var(--gradient-purple));
+    color: hsl(var(--gradient-red));
   }
 }
 
