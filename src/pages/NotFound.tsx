@@ -1,6 +1,7 @@
 import { Ghost, ArrowLeft, Home, Sparkles, Terminal } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const NotFound = () => {
   const navigate = useNavigate();
