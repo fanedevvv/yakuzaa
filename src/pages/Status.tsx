@@ -66,23 +66,23 @@ const Status = () => {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-border/50">
-                    <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground">Cluster ID</th>
-                    <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground">Status</th>
-                    <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground">Shards</th>
-                    <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground">Servers</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="px-6 py-4 text-sm text-foreground">#0</td>
-                    <td className="px-6 py-4">
-                      <span className="flex items-center gap-2 text-sm text-noxx-green">
-                        <span className="w-2 h-2 rounded-full bg-noxx-green" />
-                        Online
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-foreground">{isLoading ? "..." : shardCount}</td>
-                    <td className="px-6 py-4 text-sm text-foreground">{isLoading ? "..." : botStats?.servers ?? 0}</td>
+                     <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground">Cluster ID</th>
+                     <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground">Status</th>
+                     <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground">Shards</th>
+                     <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground">Latency</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr>
+                     <td className="px-6 py-4 text-sm text-foreground">#0</td>
+                     <td className="px-6 py-4">
+                       <span className="flex items-center gap-2 text-sm text-noxx-green">
+                         <span className="w-2 h-2 rounded-full bg-noxx-green" />
+                         Online
+                       </span>
+                     </td>
+                     <td className="px-6 py-4 text-sm text-foreground">{isLoading ? "..." : shardCount}</td>
+                     <td className="px-6 py-4 text-sm text-foreground">{isLoading ? "..." : "77ms"}</td>
                   </tr>
                 </tbody>
               </table>

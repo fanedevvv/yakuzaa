@@ -17,6 +17,9 @@ import FAQ from "./pages/FAQ.tsx";
 import Docs from "./pages/Docs.tsx";
 import Fane from "./pages/Fane.tsx";
 import Easy from "./pages/Easy.tsx";
+import EasyRules from "./pages/EasyRules.tsx";
+import Privacy from "./pages/Privacy.tsx";
+import Terms from "./pages/Terms.tsx";
 import Admin from "./pages/Admin.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -43,6 +46,9 @@ const App = () => (
           <Route path="/docs" element={<Docs />} />
           <Route path="/fane" element={<Fane />} />
           <Route path="/easy" element={<Easy />} />
+          <Route path="/easy/rules" element={<EasyRules />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
