@@ -125,6 +125,7 @@ const Features = () => {
                   </div>
                 </div>
               </motion.div>
+              </AnimatedSection>
             ))}
           </div>
 
