@@ -42,6 +42,7 @@ const testimonials = [
 ];
 
 const Index = () => {
+  const { data: botStats } = useDiscordBotStats();
   return (
     <Layout>
       {/* Hero */}
