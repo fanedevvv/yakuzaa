@@ -66,13 +66,11 @@ const Uptime = () => {
 
           <div className="max-w-3xl mx-auto space-y-6">
             {services.map((service, idx) => (
-              <motion.div
-                key={service.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                className="glass-card p-6"
-              >
+              <AnimatedSection key={service.name} delay={idx * 0.1}>
+                <motion.div
+                  whileHover={{ scale: 1.01 }}
+                  className="glass-card p-6"
+                >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-muted/50 flex items-center justify-center">
