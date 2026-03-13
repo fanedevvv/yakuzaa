@@ -16,7 +16,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const { pathname } = useLocation();
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="min-h-screen text-foreground relative">
       <KanjiBackground />
       <Navbar />
       <motion.main
