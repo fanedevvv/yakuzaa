@@ -190,11 +190,17 @@ const Navbar = () => {
               )}
             </div>
           ))}
-          <div className="flex gap-2 pt-2 border-t border-border/50">
-            <a href="#" className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red/10 text-noxx-red border border-noxx-red/30 text-sm font-medium">
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-border/50">
+            {isAdmin && (
+              <Link to="/admin" onClick={() => setMobileOpen(false)} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red text-foreground text-sm font-medium">
+                <Shield className="w-4 h-4" />
+                Admin
+              </Link>
+            )}
+            <Link to="/admin" onClick={() => setMobileOpen(false)} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red/10 text-noxx-red border border-noxx-red/30 text-sm font-medium">
               <Users className="w-4 h-4" />
-              Staff Login
-            </a>
+              {user ? "Staff Panel" : "Staff Login"}
+            </Link>
             <a href="#" className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-muted text-foreground border border-border text-sm font-medium">
               <Code className="w-4 h-4" />
               Dashboard
