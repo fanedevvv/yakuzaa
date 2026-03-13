@@ -364,6 +364,155 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Real-time Statistics */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <p className="section-label text-center mb-3">Live Performance Metrics</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-foreground mb-4">Real-time Statistics</h2>
+          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-12">
+            Monitor Yakuza's performance and impact across Discord
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {[
+              { icon: Users, value: "1,837+", label: "Active Users", color: "text-noxx-green" },
+              { icon: Server, value: "52+", label: "Total Servers", color: "text-noxx-purple" },
+              { icon: Hash, value: "2,420+", label: "Active Channels", color: "text-noxx-green" },
+              { icon: Terminal, value: "10,000+", label: "Commands Executed", color: "text-noxx-purple" },
+              { icon: Wifi, value: "88ms", label: "Current Ping", color: "text-noxx-green" },
+              { icon: Clock, value: "99.9%", label: "Uptime", color: "text-noxx-purple" },
+              { icon: Cpu, value: "v22.22.0", label: "Node Version", color: "text-noxx-green" },
+              { icon: Activity, value: "79%", label: "Availability", color: "text-noxx-purple" },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="glass-card p-5 text-center"
+              >
+                <stat.icon className={`w-5 h-5 ${stat.color} mx-auto mb-2 opacity-70`} />
+                <div className={`text-2xl font-display font-bold ${stat.color} mb-1`}>{stat.value}</div>
+                <div className="text-xs text-muted-foreground">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Updates */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <p className="section-label text-center mb-3">What's New</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-foreground mb-4">Latest Updates</h2>
+          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-12">
+            Stay up to date with the latest features and improvements
+          </p>
+          <div className="max-w-3xl mx-auto space-y-6">
+            {[
+              {
+                title: "Huge Revamp",
+                version: "2.0.5 BETA",
+                date: "February 25-29th, 2026",
+                desc: "This update revamps a lot of stuff inside of the Developer Panel and the actual bot.",
+                changes: [
+                  "Revamped Developer Page.",
+                  "Added family and adopt achievements.",
+                  "Added more premium commands.",
+                  "Updated family commands with new features like adopt and achievements.",
+                  "Fixed 50+ errors and bugs.",
+                  "Made several quality-of-life improvements.",
+                  "Enhanced user feedback messages.",
+                  "Reached 52 servers!",
+                ],
+              },
+              {
+                title: "System Improvements and Updates",
+                version: "2.0.5",
+                date: "February 09, 2026",
+                desc: "This update introduces brand new updates and some new features.",
+                changes: [
+                  "Added more features to the dashboard",
+                  "Created new commands",
+                  "Began development on ticket blacklists",
+                  "Optimized uptime for all bots",
+                  "Fixed many commands and errors",
+                  "Promoted zhyperxdev to Lead Developer",
+                  "Hired two new developers",
+                  "Switched to a new VPS",
+                ],
+              },
+              {
+                title: "AI Enhancements & System Improvements",
+                version: "2.0.4",
+                date: "November 17, 2025",
+                desc: "Powerful new AI capabilities, additional moderation tools, and quality-of-life improvements.",
+                changes: [
+                  "Added support for multiple new AI providers",
+                  "Introduced new Guild Blacklist option",
+                  "Added new disable subcommand to /automod",
+                  "Improved spam, abuse, and misuse filtering in AI system",
+                  "Upgraded Join-to-Create system control panel",
+                  "Bot mention response switched to container-style reply",
+                ],
+              },
+              {
+                title: "Music, Moderation & Uptimerobot Upgrades",
+                version: "2.0.3",
+                date: "October 14, 2025",
+                desc: "Enhanced moderation tools, improved music functionality, and stability optimizations.",
+                changes: [
+                  "Added new Uptimerobot commands for uptime monitoring",
+                  "Merged all music commands into a single /music command",
+                  "Improved moderation command embeds",
+                  "Fixed temporary channel bug in Join-to-Create system",
+                  "Optimized API rate-limit handling",
+                ],
+              },
+              {
+                title: "Dashboard & AI Update",
+                version: "1.1.0",
+                date: "September 20, 2025",
+                desc: "Major improvements to the bot and dashboard experience with prefix integration and AI fixes.",
+                changes: [
+                  "Added support for custom command prefixes",
+                  "Dashboard is now fully functional and ready for use",
+                  "AI system has been fixed and is fully operational",
+                  "Promoted 0mg_1tz_ph4nt0m to Co-Lead Developer",
+                  "Optimized bot performance and response times",
+                ],
+              },
+            ].map((update, i) => (
+              <motion.div
+                key={update.version + update.date}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="glass-card p-6"
+              >
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <h3 className="font-display font-bold text-foreground text-lg">{update.title}</h3>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-noxx-purple/20 text-noxx-purple font-semibold">{update.version}</span>
+                </div>
+                <p className="text-xs text-muted-foreground mb-3">{update.date}</p>
+                <p className="text-sm text-muted-foreground mb-4">{update.desc}</p>
+                <ul className="space-y-1.5">
+                  {update.changes.map((change, j) => (
+                    <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <CheckCircle2 className="w-4 h-4 text-noxx-green shrink-0 mt-0.5" />
+                      {change}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 };
