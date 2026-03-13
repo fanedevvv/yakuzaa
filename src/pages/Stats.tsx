@@ -3,6 +3,7 @@ import { Clock, Users, Server, MessageSquare, Layers, RefreshCw, Activity, Globe
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
+import { AreaChart, Area, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 const Stats = () => {
   const [uptime, setUptime] = useState({ days: 0, hours: 1, minutes: 0, seconds: 4 });
