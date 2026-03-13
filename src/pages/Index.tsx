@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import { Bot, ArrowRight, Sparkles, Shield, Settings, Music, BarChart3, Wrench, Gift, MessageSquare, Activity, Lightbulb, Gamepad2, Image, CheckCircle2, Users, Server } from "lucide-react";
+import { Bot, ArrowRight, Sparkles, Shield, Settings, Music, BarChart3, Wrench, Gift, MessageSquare, Activity, Lightbulb, Gamepad2, Image, CheckCircle2, Users, Server, Command } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import YakuzaLogo from "@/assets/yakuza-logo.png";
 import { useDiscordBotStats } from "@/hooks/useDiscordBotStats";
+import { useDiscordBotCommands } from "@/hooks/useDiscordBotCommands";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -43,6 +44,7 @@ const testimonials = [
 
 const Index = () => {
   const { data: botStats } = useDiscordBotStats();
+  const { data: botCommands } = useDiscordBotCommands();
   return (
     <Layout>
       {/* Hero */}
@@ -101,7 +103,7 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="flex items-center justify-center gap-3 mb-10 mt-6"
+            className="flex items-center justify-center gap-3 mb-10 mt-6 flex-wrap"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-noxx-red">
               <Server className="w-3.5 h-3.5" />
@@ -110,6 +112,10 @@ const Index = () => {
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-muted-foreground">
               <Users className="w-3.5 h-3.5" />
               {botStats?.totalMembers ? botStats.totalMembers.toLocaleString() : "..."} Members
+            </span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-muted-foreground">
+              <Command className="w-3.5 h-3.5" />
+              {botCommands?.totalFlattened ? botCommands.totalFlattened.toLocaleString() : "..."} Commands
             </span>
           </motion.div>
 
