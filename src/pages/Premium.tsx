@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Crown, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const Premium = () => {
   return (
