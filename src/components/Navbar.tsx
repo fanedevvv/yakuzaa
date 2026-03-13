@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom"; 
+import { Link, useLocation } from "react-router-dom"; 
 import {
-  Menu, X, ChevronDown, Shield, LayoutGrid, Zap, Settings, Hash,
+  Menu, X, ChevronDown, Shield, LayoutGrid, Settings, Hash,
   Diamond, Activity, Monitor, Crown, Code, Users, Sparkles,
-  MessageCircle, FileText, HelpCircle,
+  MessageCircle, FileText, HelpCircle, Check,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -133,25 +133,28 @@ const DropdownMenu = ({ menu, isOpen, onToggle, onClose }: {
 };
 
 /* ── Mobile flat menu item ── */
-const MobileMenuItem = ({ item, onClose }: { item: NavItem; onClose: () => void }) => {
+const MobileMenuItem = ({ item, onClose, isActive }: { item: NavItem; onClose: () => void; isActive: boolean }) => {
   const Icon = item.icon;
-  const className = "flex items-center gap-3 px-4 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors";
+  const base = "flex items-center gap-3 px-4 py-3 text-sm transition-colors";
+  const activeClass = isActive
+    ? `${base} text-foreground bg-muted/50 border-l-2 border-noxx-red`
+    : `${base} text-muted-foreground hover:text-foreground hover:bg-muted/40`;
+
+  const content = (
+    <>
+      <Icon className="w-5 h-5" />
+      <span className="flex-1">{item.label}</span>
+      {isActive && <Check className="w-5 h-5 text-foreground" />}
+    </>
+  );
 
   return item.external ? (
-    <a
-      href={item.path}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={onClose}
-      className={className}
-    >
-      <Icon className="w-5 h-5" />
-      {item.label}
+    <a href={item.path} target="_blank" rel="noopener noreferrer" onClick={onClose} className={activeClass}>
+      {content}
     </a>
   ) : (
-    <Link to={item.path} onClick={onClose} className={className}>
-      <Icon className="w-5 h-5" />
-      {item.label}
+    <Link to={item.path} onClick={onClose} className={activeClass}>
+      {content}
     </Link>
   );
 };
@@ -160,6 +163,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const { user, isAdmin } = useAuth();
+  const location = useLocation();
 
   useEffect(() => {
     const handler = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
@@ -246,7 +250,7 @@ const Navbar = () => {
                         {category.label}
                       </p>
                       {category.items.map((item) => (
-                        <MobileMenuItem key={item.path} item={item} onClose={closeMobile} />
+                        <MobileMenuItem key={item.path} item={item} onClose={closeMobile} isActive={!item.external && location.pathname === item.path} />
                       ))}
                     </div>
                   ))}
