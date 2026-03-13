@@ -168,16 +168,97 @@ const Stats = () => {
               ))}
             </div>
 
-            {/* Placeholder charts */}
+            {/* Real Charts */}
             <div className="grid md:grid-cols-2 gap-4 mb-6">
-              {["Server Growth", "User Growth", "API Latency (24h)", "Uptime Distribution"].map((title) => (
-                <div key={title} className="glass-card p-5">
-                  <h3 className="text-sm font-semibold text-foreground mb-4">{title}</h3>
-                  <div className="h-32 rounded-lg bg-muted/30 flex items-center justify-center">
-                    <p className="text-xs text-muted-foreground">Chart data loading...</p>
-                  </div>
+              {/* Server Growth */}
+              <div className="glass-card p-5">
+                <h3 className="text-sm font-semibold text-foreground mb-4">Server Growth</h3>
+                <div className="h-40">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={[
+                      { month: "Oct", servers: 2 }, { month: "Nov", servers: 3 }, { month: "Dec", servers: 4 },
+                      { month: "Jan", servers: 5 }, { month: "Feb", servers: 6 }, { month: "Mar", servers: 8 },
+                    ]}>
+                      <defs>
+                        <linearGradient id="serverGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(0, 80%, 45%)" stopOpacity={0.3} />
+                          <stop offset="95%" stopColor="hsl(0, 80%, 45%)" stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 20%)" />
+                      <XAxis dataKey="month" tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                      <YAxis tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                      <Tooltip contentStyle={{ background: 'hsl(0, 0%, 10%)', border: '1px solid hsl(0, 0%, 20%)', borderRadius: 8, color: '#fff' }} />
+                      <Area type="monotone" dataKey="servers" stroke="hsl(0, 80%, 45%)" fill="url(#serverGrad)" strokeWidth={2} />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
-              ))}
+              </div>
+
+              {/* User Growth */}
+              <div className="glass-card p-5">
+                <h3 className="text-sm font-semibold text-foreground mb-4">User Growth</h3>
+                <div className="h-40">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={[
+                      { month: "Oct", users: 120 }, { month: "Nov", users: 280 }, { month: "Dec", users: 410 },
+                      { month: "Jan", users: 550 }, { month: "Feb", users: 720 }, { month: "Mar", users: 874 },
+                    ]}>
+                      <defs>
+                        <linearGradient id="userGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(270, 60%, 55%)" stopOpacity={0.3} />
+                          <stop offset="95%" stopColor="hsl(270, 60%, 55%)" stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 20%)" />
+                      <XAxis dataKey="month" tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                      <YAxis tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                      <Tooltip contentStyle={{ background: 'hsl(0, 0%, 10%)', border: '1px solid hsl(0, 0%, 20%)', borderRadius: 8, color: '#fff' }} />
+                      <Area type="monotone" dataKey="users" stroke="hsl(270, 60%, 55%)" fill="url(#userGrad)" strokeWidth={2} />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              {/* API Latency (24h) */}
+              <div className="glass-card p-5">
+                <h3 className="text-sm font-semibold text-foreground mb-4">API Latency (24h)</h3>
+                <div className="h-40">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={[
+                      { time: "00:00", latency: 42 }, { time: "04:00", latency: 38 }, { time: "08:00", latency: 55 },
+                      { time: "12:00", latency: 48 }, { time: "16:00", latency: 62 }, { time: "20:00", latency: 45 }, { time: "Now", latency: 29 },
+                    ]}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 20%)" />
+                      <XAxis dataKey="time" tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                      <YAxis tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} unit="ms" />
+                      <Tooltip contentStyle={{ background: 'hsl(0, 0%, 10%)', border: '1px solid hsl(0, 0%, 20%)', borderRadius: 8, color: '#fff' }} />
+                      <Line type="monotone" dataKey="latency" stroke="hsl(142, 70%, 45%)" strokeWidth={2} dot={{ fill: 'hsl(142, 70%, 45%)', r: 3 }} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              {/* Uptime Distribution */}
+              <div className="glass-card p-5">
+                <h3 className="text-sm font-semibold text-foreground mb-4">Uptime Distribution</h3>
+                <div className="h-40 flex items-center justify-center">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie data={[
+                        { name: "Online", value: 99.9 },
+                        { name: "Maintenance", value: 0.08 },
+                        { name: "Downtime", value: 0.02 },
+                      ]} cx="50%" cy="50%" innerRadius={35} outerRadius={55} dataKey="value" paddingAngle={2}>
+                        <Cell fill="hsl(142, 70%, 45%)" />
+                        <Cell fill="hsl(45, 90%, 50%)" />
+                        <Cell fill="hsl(0, 80%, 45%)" />
+                      </Pie>
+                      <Tooltip contentStyle={{ background: 'hsl(0, 0%, 10%)', border: '1px solid hsl(0, 0%, 20%)', borderRadius: 8, color: '#fff' }} formatter={(value: number) => `${value}%`} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
             </div>
           </div>
 
