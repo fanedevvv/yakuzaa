@@ -94,15 +94,17 @@ const Stats = () => {
             </button>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-2" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
-            Bot Statistics
-          </h1>
-          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-2">
-            Real-time performance metrics and system information for Yakuza
-          </p>
-          <p className="text-center text-xs text-muted-foreground mb-8">
-            Last updated: {new Date().toLocaleTimeString()}
-          </p>
+          <AnimatedSection>
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-2" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
+              Bot Statistics
+            </h1>
+            <p className="text-center text-muted-foreground max-w-xl mx-auto mb-2">
+              Real-time performance metrics and system information for Yakuza
+            </p>
+            <p className="text-center text-xs text-muted-foreground mb-8">
+              Last updated: {new Date().toLocaleTimeString()}
+            </p>
+          </AnimatedSection>
 
           {/* Uptime Banner */}
           <motion.div

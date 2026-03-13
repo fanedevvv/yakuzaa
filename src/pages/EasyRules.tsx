@@ -77,7 +77,9 @@ const EasyRules = () => {
           </div>
 
           {/* Quick Reference */}
-          <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">Quick Reference</h2>
+          <AnimatedSection>
+            <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">Quick Reference</h2>
+          </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             <div className="glass-card p-6">
               <h3 className="font-display font-bold text-noxx-green text-lg mb-4">Do's</h3>

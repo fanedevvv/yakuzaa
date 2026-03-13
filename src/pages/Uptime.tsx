@@ -111,6 +111,7 @@ const Uptime = () => {
                   <span className="text-xs text-muted-foreground">Today</span>
                 </div>
               </motion.div>
+              </AnimatedSection>
             ))}
 
             {/* Recent Notices */}

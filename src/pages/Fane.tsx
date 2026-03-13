@@ -111,17 +111,21 @@ const Fane = () => {
           </div>
 
           {/* Timeline */}
-          <h2 className="text-2xl font-display font-bold text-foreground mb-6">My Developer Journey</h2>
+          <AnimatedSection>
+            <h2 className="text-2xl font-display font-bold text-foreground mb-6">My Developer Journey</h2>
+          </AnimatedSection>
           <div className="space-y-4 mb-12">
-            {timeline.map((item) => (
-              <div key={item.year} className="glass-card p-5 flex gap-4">
-                <div className="text-noxx-red font-display font-bold text-lg shrink-0 w-12">{item.year}</div>
-                <div>
-                  <h3 className="font-display font-semibold text-foreground">{item.title}</h3>
-                  <span className="text-xs text-noxx-red">{item.tech}</span>
-                  <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
+            {timeline.map((item, i) => (
+              <AnimatedSection key={item.year} delay={i * 0.08} direction="left">
+                <div className="glass-card p-5 flex gap-4">
+                  <div className="text-noxx-red font-display font-bold text-lg shrink-0 w-12">{item.year}</div>
+                  <div>
+                    <h3 className="font-display font-semibold text-foreground">{item.title}</h3>
+                    <span className="text-xs text-noxx-red">{item.tech}</span>
+                    <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
+                  </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
 

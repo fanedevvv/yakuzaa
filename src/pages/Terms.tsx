@@ -134,7 +134,7 @@ const Terms = () => {
                 If you have any questions about these Terms, please contact us through our Discord support server or via the contact information provided on our website.
               </p>
             </section>
-          </div>
+          </AnimatedSection>
 
           <div className="text-center mt-12">
             <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">

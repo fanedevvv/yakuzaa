@@ -146,13 +146,17 @@ const Easy = () => {
       {/* Community Metrics */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">Community Metrics</h2>
+          <AnimatedSection>
+            <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">Community Metrics</h2>
+          </AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {metrics.map((m) => (
-              <div key={m.label} className="glass-card p-5 text-center">
-                <div className="text-2xl font-display font-bold text-noxx-red mb-1">{m.value}</div>
-                <div className="text-xs text-muted-foreground">{m.label}</div>
-              </div>
+            {metrics.map((m, i) => (
+              <AnimatedSection key={m.label} delay={i * 0.08}>
+                <div className="glass-card p-5 text-center h-full">
+                  <div className="text-2xl font-display font-bold text-noxx-red mb-1">{m.value}</div>
+                  <div className="text-xs text-muted-foreground">{m.label}</div>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>

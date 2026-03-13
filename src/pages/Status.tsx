@@ -26,12 +26,14 @@ const Status = () => {
             </span>
           </motion.div>
 
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-4" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
-            Bot Clusters
-          </h1>
-          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-8">
-            Monitor your bot's clusters and shards in real time. Data is pulled live from Discord API.
-          </p>
+          <AnimatedSection>
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-4" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
+              Bot Clusters
+            </h1>
+            <p className="text-center text-muted-foreground max-w-xl mx-auto mb-8">
+              Monitor your bot's clusters and shards in real time. Data is pulled live from Discord API.
+            </p>
+          </AnimatedSection>
 
           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground mb-8">
             <span className="flex items-center gap-2">

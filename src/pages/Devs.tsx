@@ -9,12 +9,14 @@ const Devs = () => {
     <Layout>
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-4" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
-            Meet The Architects
-          </h1>
-          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-16">
-            The brilliant minds powering innovation at Yakuza Development.
-          </p>
+          <AnimatedSection>
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-4" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
+              Meet The Architects
+            </h1>
+            <p className="text-center text-muted-foreground max-w-xl mx-auto mb-16">
+              The brilliant minds powering innovation at Yakuza Development.
+            </p>
+          </AnimatedSection>
 
           <div className="flex justify-center mb-12">
             <motion.div

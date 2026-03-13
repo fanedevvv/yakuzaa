@@ -10,19 +10,21 @@ const NotFound = () => {
     <Layout>
       <section className="py-20 text-center">
         <div className="container mx-auto px-4">
-          <div className="mb-6">
-            <div className="w-20 h-20 mx-auto rounded-full bg-noxx-red/10 border border-noxx-red/30 flex items-center justify-center mb-6">
-              <Ghost className="w-10 h-10 text-noxx-red" />
+          <AnimatedSection>
+            <div className="mb-6">
+              <div className="w-20 h-20 mx-auto rounded-full bg-noxx-red/10 border border-noxx-red/30 flex items-center justify-center mb-6">
+                <Ghost className="w-10 h-10 text-noxx-red" />
+              </div>
             </div>
-          </div>
 
-          <h1 className="text-8xl md:text-9xl font-display font-bold text-noxx-red mb-2" style={{ textShadow: "0 0 60px hsl(0 80% 45% / 0.4)" }}>
-            404
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">Page Not Found</h2>
-          <p className="text-muted-foreground max-w-md mx-auto mb-8">
-            Oops! It seems like you've ventured into uncharted territory. The page you're looking for doesn't exist or has been moved.
-          </p>
+            <h1 className="text-8xl md:text-9xl font-display font-bold text-noxx-red mb-2" style={{ textShadow: "0 0 60px hsl(0 80% 45% / 0.4)" }}>
+              404
+            </h1>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">Page Not Found</h2>
+            <p className="text-muted-foreground max-w-md mx-auto mb-8">
+              Oops! It seems like you've ventured into uncharted territory. The page you're looking for doesn't exist or has been moved.
+            </p>
+          </AnimatedSection>
 
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             <button
