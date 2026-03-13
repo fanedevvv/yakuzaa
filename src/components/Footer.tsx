@@ -41,8 +41,8 @@ const Footer = () => {
         </div>
 
         <div className="mt-10 pt-6 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2026 Noxx. All rights reserved.</p>
-          <p>Made with ❤️ by the Noxx Team</p>
+          <p>© 2026 Yakuza. All rights reserved.</p>
+          <p>Made with ❤️ by the Yakuza Team</p>
         </div>
       </div>
     </footer>

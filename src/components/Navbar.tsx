@@ -19,8 +19,8 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-xl text-foreground">
-          <Bot className="w-6 h-6 text-noxx-purple" />
-          Noxx
+          <img src={YakuzaLogo} alt="Yakuza" className="w-8 h-8 rounded-full" />
+          Yakuza
         </Link>
 
         {/* Desktop nav */}
