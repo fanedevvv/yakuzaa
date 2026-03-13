@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import KanjiBackground from "./KanjiBackground";
+import ScrollToTop from "./ScrollToTop";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -10,6 +11,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <Navbar />
       <main className="relative z-10">{children}</main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };
