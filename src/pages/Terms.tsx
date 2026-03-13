@@ -27,7 +27,7 @@ const Terms = () => {
           </motion.h1>
           <p className="text-center text-sm text-muted-foreground mb-12">Last updated: March 2026</p>
 
-          <AnimatedSection>
+          <AnimatedSection className="space-y-8 text-muted-foreground text-sm leading-relaxed">
             <section>
               <h2 className="text-xl font-display font-bold text-foreground mb-3">Acknowledgment</h2>
               <p>
