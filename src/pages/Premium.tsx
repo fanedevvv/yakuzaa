@@ -8,7 +8,7 @@ const Premium = () => {
   return (
     <Layout>
       <section className="py-20 min-h-[60vh] flex items-center">
-        <div className="container mx-auto px-4 text-center">
+        <AnimatedSection className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
