@@ -17,6 +17,7 @@ import FAQ from "./pages/FAQ.tsx";
 import Docs from "./pages/Docs.tsx";
 import Fane from "./pages/Fane.tsx";
 import Easy from "./pages/Easy.tsx";
+import Admin from "./pages/Admin.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/docs" element={<Docs />} />
           <Route path="/fane" element={<Fane />} />
           <Route path="/easy" element={<Easy />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

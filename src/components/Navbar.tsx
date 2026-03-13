@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { Users, Code, Menu, X, ChevronDown } from "lucide-react";
+import { Users, Code, Menu, X, ChevronDown, Shield } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import YakuzaLogo from "@/assets/yakuza-logo.png";
+import { useAuth } from "@/hooks/useAuth";
 
 const navMenus = [
   {
@@ -100,6 +101,7 @@ const DropdownMenu = ({ menu, isOpen, onToggle, onClose }: {
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const { user, isAdmin } = useAuth();
 
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50">
@@ -123,13 +125,22 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-2">
-          <a
-            href="#"
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red text-foreground text-sm font-medium hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20"
+            >
+              <Shield className="w-4 h-4" />
+              Admin
+            </Link>
+          )}
+          <Link
+            to={user ? "/admin" : "/admin"}
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red/10 text-noxx-red border border-noxx-red/30 text-sm font-medium hover:bg-noxx-red/20 transition-colors"
           >
             <Users className="w-4 h-4" />
-            Staff Login
-          </a>
+            {user ? "Staff Panel" : "Staff Login"}
+          </Link>
           <a
             href="#"
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-muted text-foreground border border-border text-sm font-medium hover:bg-muted/80 transition-colors"
@@ -179,11 +190,17 @@ const Navbar = () => {
               )}
             </div>
           ))}
-          <div className="flex gap-2 pt-2 border-t border-border/50">
-            <a href="#" className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red/10 text-noxx-red border border-noxx-red/30 text-sm font-medium">
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-border/50">
+            {isAdmin && (
+              <Link to="/admin" onClick={() => setMobileOpen(false)} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red text-foreground text-sm font-medium">
+                <Shield className="w-4 h-4" />
+                Admin
+              </Link>
+            )}
+            <Link to="/admin" onClick={() => setMobileOpen(false)} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red/10 text-noxx-red border border-noxx-red/30 text-sm font-medium">
               <Users className="w-4 h-4" />
-              Staff Login
-            </a>
+              {user ? "Staff Panel" : "Staff Login"}
+            </Link>
             <a href="#" className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-muted text-foreground border border-border text-sm font-medium">
               <Code className="w-4 h-4" />
               Dashboard

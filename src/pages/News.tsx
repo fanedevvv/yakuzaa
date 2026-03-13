@@ -1,27 +1,29 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import { supabase } from "@/integrations/supabase/client";
 
-const newsItems = [
-  {
-    title: "Dashboard version 2.0.4 BETA",
-    date: "January 30, 2026",
-    desc: "We fixed some more bugs on dashboard, including music system and anti-spam system.",
-  },
-  {
-    title: "Bugs fixed",
-    date: "January 29, 2026",
-    desc: "We have remade the goodbye system and ticket system. They work 100%. Other updates are in preparation.",
-  },
-  {
-    title: "Up and running",
-    date: "January 19, 2026",
-    desc: "All Yakuza services, Yakuza Bot and Yakuza Dashboard is up and running.\nBoth is in beta, so every bug report is priceless for us.",
-  },
+const fallbackNews = [
+  { id: "1", title: "Dashboard version 2.0.4 BETA", date: "January 30, 2026", description: "We fixed some more bugs on dashboard, including music system and anti-spam system." },
+  { id: "2", title: "Bugs fixed", date: "January 29, 2026", description: "We have remade the goodbye system and ticket system. They work 100%. Other updates are in preparation." },
+  { id: "3", title: "Up and running", date: "January 19, 2026", description: "All Yakuza services, Yakuza Bot and Yakuza Dashboard is up and running.\nBoth is in beta, so every bug report is priceless for us." },
 ];
 
 const News = () => {
+  const [newsItems, setNewsItems] = useState(fallbackNews);
+
+  useEffect(() => {
+    supabase
+      .from("news")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (data && data.length > 0) setNewsItems(data);
+      });
+  }, []);
+
   return (
     <Layout>
       <section className="py-20">
@@ -36,7 +38,7 @@ const News = () => {
           <div className="max-w-3xl mx-auto space-y-4">
             {newsItems.map((item, i) => (
               <motion.div
-                key={item.title}
+                key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
@@ -47,7 +49,7 @@ const News = () => {
                   <Calendar className="w-4 h-4" />
                   {item.date}
                 </div>
-                <p className="text-muted-foreground whitespace-pre-line">{item.desc}</p>
+                <p className="text-muted-foreground whitespace-pre-line">{item.description}</p>
               </motion.div>
             ))}
           </div>
