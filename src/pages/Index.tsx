@@ -81,11 +81,11 @@ const Index = () => {
             transition={{ delay: 0.3 }}
             className="mb-3 relative inline-block"
           >
-            <div className="w-36 h-36 mx-auto rounded-full border-2 border-noxx-red/60 overflow-hidden shadow-lg shadow-noxx-red/30">
+            <div className="w-36 h-36 mx-auto">
               <img
                 src={YakuzaLogo}
                 alt="Yakuza Bot"
-                className="w-full h-full object-cover scale-125"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 rounded-full bg-card/80 border border-border/50 backdrop-blur-sm">
