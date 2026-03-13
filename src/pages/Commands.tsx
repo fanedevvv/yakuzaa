@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, Crown, Shield, Coins, Gavel, Music, Gamepad2, Wrench, TrendingUp, Gift, MessageSquare, Heart, ScrollText, ImageIcon, Bot, Users, Swords, Zap, Radio, Bell, Lock, Megaphone, Cog, Loader2, RefreshCw } from "lucide-react";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 import { useDiscordBotCommands, BotCommand } from "@/hooks/useDiscordBotCommands";
 
 // Map parentName to category info
@@ -164,18 +165,20 @@ const Commands = () => {
     <Layout>
       <section className="py-12">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h1
-            className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-2"
-            style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}
-          >
-            Commands
-          </h1>
-          <p className="text-center text-muted-foreground mb-1 text-sm">
-            {isLoading ? "Loading..." : `${totalCommands} commands across ${categories.length} categories`}
-          </p>
-          <p className="text-center text-muted-foreground mb-2 text-xs">
-            Synced live from Discord API • All slash commands (/)
-          </p>
+          <AnimatedSection>
+            <h1
+              className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-2"
+              style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}
+            >
+              Commands
+            </h1>
+            <p className="text-center text-muted-foreground mb-1 text-sm">
+              {isLoading ? "Loading..." : `${totalCommands} commands across ${categories.length} categories`}
+            </p>
+            <p className="text-center text-muted-foreground mb-2 text-xs">
+              Synced live from Discord API • All slash commands (/)
+            </p>
+          </AnimatedSection>
 
           <div className="flex justify-center mb-6">
             <button

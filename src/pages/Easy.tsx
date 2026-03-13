@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink, Users, Percent, Award, Clock, MessageSquare, Gamepad2, Palette, Shield, Gift, Code } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const metrics = [
   { value: "4000+", label: "Total Members" },
@@ -80,18 +81,24 @@ const Easy = () => {
       {/* About */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-display font-bold text-center text-foreground mb-2">
-            About <span className="text-noxx-red">Easy-Code</span>
-          </h2>
-          <div className="w-16 h-1 bg-noxx-red mx-auto rounded mb-8" />
-          <div className="glass-card p-6 mb-6">
-            <p className="text-muted-foreground">
-              Easy-Code is a thriving <span className="text-noxx-red font-semibold">resources forum</span> of developers, gamers and passionates. We have all kind of resources, leaks and fun stuff.
+          <AnimatedSection>
+            <h2 className="text-3xl font-display font-bold text-center text-foreground mb-2">
+              About <span className="text-noxx-red">Easy-Code</span>
+            </h2>
+            <div className="w-16 h-1 bg-noxx-red mx-auto rounded mb-8" />
+          </AnimatedSection>
+          <AnimatedSection direction="left" delay={0.1}>
+            <div className="glass-card p-6 mb-6">
+              <p className="text-muted-foreground">
+                Easy-Code is a thriving <span className="text-noxx-red font-semibold">resources forum</span> of developers, gamers and passionates. We have all kind of resources, leaks and fun stuff.
+              </p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection direction="right" delay={0.15}>
+            <p className="text-muted-foreground text-center">
+              We unite people across the digital landscape, sharing epic moments, make new <span className="text-noxx-red font-semibold">dreams</span> and fostering a friendly and welcoming environment for all skill levels. Join Easy-Code to access quality resources in game dev, web dev, scripting, design and more. Connect with other creators and level up your project.
             </p>
-          </div>
-          <p className="text-muted-foreground text-center">
-            We unite people across the digital landscape, sharing epic moments, make new <span className="text-noxx-red font-semibold">dreams</span> and fostering a friendly and welcoming environment for all skill levels. Join Easy-Code to access quality resources in game dev, web dev, scripting, design and more. Connect with other creators and level up your project.
-          </p>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -119,14 +126,18 @@ const Easy = () => {
       {/* What We Offer */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">What We Offer</h2>
+          <AnimatedSection>
+            <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">What We Offer</h2>
+          </AnimatedSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {offers.map((item) => (
-              <div key={item.title} className="glass-card-hover p-5">
-                <item.icon className="w-6 h-6 text-noxx-red mb-3" />
-                <h3 className="font-display font-semibold text-foreground mb-1">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </div>
+            {offers.map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.08}>
+                <div className="glass-card-hover p-5 h-full">
+                  <item.icon className="w-6 h-6 text-noxx-red mb-3" />
+                  <h3 className="font-display font-semibold text-foreground mb-1">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -135,13 +146,17 @@ const Easy = () => {
       {/* Community Metrics */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">Community Metrics</h2>
+          <AnimatedSection>
+            <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">Community Metrics</h2>
+          </AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {metrics.map((m) => (
-              <div key={m.label} className="glass-card p-5 text-center">
-                <div className="text-2xl font-display font-bold text-noxx-red mb-1">{m.value}</div>
-                <div className="text-xs text-muted-foreground">{m.label}</div>
-              </div>
+            {metrics.map((m, i) => (
+              <AnimatedSection key={m.label} delay={i * 0.08}>
+                <div className="glass-card p-5 text-center h-full">
+                  <div className="text-2xl font-display font-bold text-noxx-red mb-1">{m.value}</div>
+                  <div className="text-xs text-muted-foreground">{m.label}</div>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>

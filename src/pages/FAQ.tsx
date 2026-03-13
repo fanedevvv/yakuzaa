@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const faqs = [
@@ -79,12 +80,7 @@ const FAQ = () => {
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="space-y-3">
               {faqs.map((faq, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                >
+                <AnimatedSection key={i} delay={i * 0.05}>
                   <AccordionItem value={`faq-${i}`} className="glass-card border-border/30 px-6 rounded-xl">
                     <AccordionTrigger className="text-foreground hover:no-underline text-left">
                       {faq.q}
@@ -93,38 +89,35 @@ const FAQ = () => {
                       {faq.a}
                     </AccordionContent>
                   </AccordionItem>
-                </motion.div>
+                </AnimatedSection>
               ))}
             </Accordion>
 
             {/* Still have questions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="glass-card p-8 text-center mt-10"
-            >
-              <h2 className="text-xl font-bold text-foreground mb-2">Still have questions?</h2>
-              <p className="text-muted-foreground mb-6">
-                Join our support server and our team will be happy to help!
-              </p>
-              <div className="flex items-center justify-center gap-4">
-                <a
-                  href="https://discord.gg/a9Kea3ymC7"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-noxx-red text-white font-semibold text-sm hover:bg-noxx-red/90 transition-colors"
-                >
-                  Get Support
-                </a>
-                <Link
-                  to="/"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
-                >
-                  Return Home
-                </Link>
+            <AnimatedSection delay={0.3}>
+              <div className="glass-card p-8 text-center mt-10">
+                <h2 className="text-xl font-bold text-foreground mb-2">Still have questions?</h2>
+                <p className="text-muted-foreground mb-6">
+                  Join our support server and our team will be happy to help!
+                </p>
+                <div className="flex items-center justify-center gap-4">
+                  <a
+                    href="https://discord.gg/a9Kea3ymC7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-noxx-red text-white font-semibold text-sm hover:bg-noxx-red/90 transition-colors"
+                  >
+                    Get Support
+                  </a>
+                  <Link
+                    to="/"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
+                  >
+                    Return Home
+                  </Link>
+                </div>
               </div>
-            </motion.div>
+            </AnimatedSection>
           </div>
         </div>
       </section>

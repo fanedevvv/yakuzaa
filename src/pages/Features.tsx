@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Shield, Settings, Music, Coins, Wrench, Gift, MessageSquare, Activity, Lightbulb, Gamepad2, Image, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const features = [
   {
@@ -89,12 +90,10 @@ const Features = () => {
 
           <div className="max-w-4xl mx-auto space-y-8">
             {features.map((feat, i) => (
+              <AnimatedSection key={feat.title} delay={i * 0.05}>
               <motion.div
-                key={feat.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
+                whileHover={{ scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 300 }}
                 className="glass-card p-8"
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -126,22 +125,25 @@ const Features = () => {
                   </div>
                 </div>
               </motion.div>
+              </AnimatedSection>
             ))}
           </div>
 
           {/* CTA */}
-          <div className="text-center mt-16">
-            <h2 className="text-2xl font-display font-bold text-foreground mb-4">Ready to get started?</h2>
-            <p className="text-muted-foreground mb-6">Add Yakuza to your server today and unlock all these features for free.</p>
-            <a
-              href="https://discord.com/oauth2/authorize?client_id=1448429544112656588&permissions=8&integration_type=0&scope=bot+applications.commands"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-noxx-red text-foreground font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20"
-            >
-              Add to Discord <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
+          <AnimatedSection>
+            <div className="text-center mt-16">
+              <h2 className="text-2xl font-display font-bold text-foreground mb-4">Ready to get started?</h2>
+              <p className="text-muted-foreground mb-6">Add Yakuza to your server today and unlock all these features for free.</p>
+              <a
+                href="https://discord.com/oauth2/authorize?client_id=1448429544112656588&permissions=8&integration_type=0&scope=bot+applications.commands"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-noxx-red text-foreground font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20"
+              >
+                Add to Discord <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </Layout>

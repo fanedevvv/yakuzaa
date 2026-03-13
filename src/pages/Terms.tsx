@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const Terms = () => {
   return (
@@ -26,7 +27,7 @@ const Terms = () => {
           </motion.h1>
           <p className="text-center text-sm text-muted-foreground mb-12">Last updated: March 2026</p>
 
-          <div className="space-y-8 text-muted-foreground text-sm leading-relaxed">
+          <AnimatedSection className="space-y-8 text-muted-foreground text-sm leading-relaxed">
             <section>
               <h2 className="text-xl font-display font-bold text-foreground mb-3">Acknowledgment</h2>
               <p>
@@ -133,7 +134,7 @@ const Terms = () => {
                 If you have any questions about these Terms, please contact us through our Discord support server or via the contact information provided on our website.
               </p>
             </section>
-          </div>
+          </AnimatedSection>
 
           <div className="text-center mt-12">
             <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">

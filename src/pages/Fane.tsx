@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Code, Bot, Clock, Sparkles, Globe } from "lucide-react";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const stats = [
   { icon: Code, value: "50k+", label: "LINES OF CODE" },
@@ -83,14 +84,18 @@ const Fane = () => {
           </motion.div>
 
           {/* Stats */}
-          <h2 className="text-2xl font-display font-bold text-center text-foreground mb-6">My Coding Life at a Glance</h2>
+          <AnimatedSection>
+            <h2 className="text-2xl font-display font-bold text-center text-foreground mb-6">My Coding Life at a Glance</h2>
+          </AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            {stats.map((stat) => (
-              <div key={stat.label} className="glass-card p-5">
-                <stat.icon className="w-5 h-5 text-noxx-red mb-2" />
-                <div className="text-xl font-display font-bold text-foreground">{stat.value}</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
-              </div>
+            {stats.map((stat, i) => (
+              <AnimatedSection key={stat.label} delay={i * 0.08}>
+                <div className="glass-card p-5 h-full">
+                  <stat.icon className="w-5 h-5 text-noxx-red mb-2" />
+                  <div className="text-xl font-display font-bold text-foreground">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
 
@@ -106,17 +111,21 @@ const Fane = () => {
           </div>
 
           {/* Timeline */}
-          <h2 className="text-2xl font-display font-bold text-foreground mb-6">My Developer Journey</h2>
+          <AnimatedSection>
+            <h2 className="text-2xl font-display font-bold text-foreground mb-6">My Developer Journey</h2>
+          </AnimatedSection>
           <div className="space-y-4 mb-12">
-            {timeline.map((item) => (
-              <div key={item.year} className="glass-card p-5 flex gap-4">
-                <div className="text-noxx-red font-display font-bold text-lg shrink-0 w-12">{item.year}</div>
-                <div>
-                  <h3 className="font-display font-semibold text-foreground">{item.title}</h3>
-                  <span className="text-xs text-noxx-red">{item.tech}</span>
-                  <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
+            {timeline.map((item, i) => (
+              <AnimatedSection key={item.year} delay={i * 0.08} direction="left">
+                <div className="glass-card p-5 flex gap-4">
+                  <div className="text-noxx-red font-display font-bold text-lg shrink-0 w-12">{item.year}</div>
+                  <div>
+                    <h3 className="font-display font-semibold text-foreground">{item.title}</h3>
+                    <span className="text-xs text-noxx-red">{item.tech}</span>
+                    <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
+                  </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
 
