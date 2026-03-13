@@ -78,7 +78,7 @@ const Partners = () => {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </AnimatedSection>
 
           <p className="text-center text-muted-foreground italic mb-8">Supporting the community, one partnership at a time.</p>
           <div className="text-center">

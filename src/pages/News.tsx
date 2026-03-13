@@ -40,20 +40,16 @@ const News = () => {
 
           <div className="max-w-3xl mx-auto space-y-4">
             {newsItems.map((item, i) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="glass-card p-6"
-              >
-                <h2 className="font-display font-bold text-foreground text-xl mb-2">{item.title}</h2>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                  <Calendar className="w-4 h-4" />
-                  {item.date}
+              <AnimatedSection key={item.id} delay={i * 0.1} direction={i % 2 === 0 ? "left" : "right"}>
+                <div className="glass-card p-6">
+                  <h2 className="font-display font-bold text-foreground text-xl mb-2">{item.title}</h2>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                    <Calendar className="w-4 h-4" />
+                    {item.date}
+                  </div>
+                  <p className="text-muted-foreground whitespace-pre-line">{item.description}</p>
                 </div>
-                <p className="text-muted-foreground whitespace-pre-line">{item.description}</p>
-              </motion.div>
+              </AnimatedSection>
             ))}
           </div>
 

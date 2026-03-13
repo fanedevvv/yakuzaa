@@ -94,33 +94,30 @@ const FAQ = () => {
             </Accordion>
 
             {/* Still have questions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="glass-card p-8 text-center mt-10"
-            >
-              <h2 className="text-xl font-bold text-foreground mb-2">Still have questions?</h2>
-              <p className="text-muted-foreground mb-6">
-                Join our support server and our team will be happy to help!
-              </p>
-              <div className="flex items-center justify-center gap-4">
-                <a
-                  href="https://discord.gg/a9Kea3ymC7"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-noxx-red text-white font-semibold text-sm hover:bg-noxx-red/90 transition-colors"
-                >
-                  Get Support
-                </a>
-                <Link
-                  to="/"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
-                >
-                  Return Home
-                </Link>
+            <AnimatedSection delay={0.3}>
+              <div className="glass-card p-8 text-center mt-10">
+                <h2 className="text-xl font-bold text-foreground mb-2">Still have questions?</h2>
+                <p className="text-muted-foreground mb-6">
+                  Join our support server and our team will be happy to help!
+                </p>
+                <div className="flex items-center justify-center gap-4">
+                  <a
+                    href="https://discord.gg/a9Kea3ymC7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-noxx-red text-white font-semibold text-sm hover:bg-noxx-red/90 transition-colors"
+                  >
+                    Get Support
+                  </a>
+                  <Link
+                    to="/"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
+                  >
+                    Return Home
+                  </Link>
+                </div>
               </div>
-            </motion.div>
+            </AnimatedSection>
           </div>
         </div>
       </section>

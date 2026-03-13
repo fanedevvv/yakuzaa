@@ -70,7 +70,7 @@ const Premium = () => {
               Join Discord
             </a>
           </motion.div>
-        </div>
+        </AnimatedSection>
       </section>
     </Layout>
   );

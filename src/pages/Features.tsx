@@ -130,18 +130,20 @@ const Features = () => {
           </div>
 
           {/* CTA */}
-          <div className="text-center mt-16">
-            <h2 className="text-2xl font-display font-bold text-foreground mb-4">Ready to get started?</h2>
-            <p className="text-muted-foreground mb-6">Add Yakuza to your server today and unlock all these features for free.</p>
-            <a
-              href="https://discord.com/oauth2/authorize?client_id=1448429544112656588&permissions=8&integration_type=0&scope=bot+applications.commands"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-noxx-red text-foreground font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20"
-            >
-              Add to Discord <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
+          <AnimatedSection>
+            <div className="text-center mt-16">
+              <h2 className="text-2xl font-display font-bold text-foreground mb-4">Ready to get started?</h2>
+              <p className="text-muted-foreground mb-6">Add Yakuza to your server today and unlock all these features for free.</p>
+              <a
+                href="https://discord.com/oauth2/authorize?client_id=1448429544112656588&permissions=8&integration_type=0&scope=bot+applications.commands"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-noxx-red text-foreground font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20"
+              >
+                Add to Discord <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </Layout>
