@@ -19,9 +19,9 @@ const team: TeamMember[] = [
     name: "f34r_fn",
     role: "Lead Architect & Founder",
     avatar: "https://cdn.discordapp.com/avatars/1075077561454973020/0a2a725861ba7e6f1f041888ef183635.png?size=128",
-    desc: "The mastermind behind Xyron Development. Leads the technical vision, designs complex systems, and sets the architectural standard for the entire team.",
+    desc: "The mastermind behind Yakuza Development. Leads the technical vision, designs complex systems, and sets the architectural standard for the entire team.",
     focusArea: "Backend Systems, Scaling & Core Architecture",
-    contribution: "Noxx Core API, Primary Bot Logic, Deployment Infrastructure",
+    contribution: "Yakuza Core API, Primary Bot Logic, Deployment Infrastructure",
     skills: ["JavaScript", "React", "Node.js", "PostgreSQL", "Docker", "AWS"],
     category: "Leadership",
   },
@@ -76,12 +76,12 @@ const Devs = () => {
     <Layout>
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <p className="section-label text-center mb-3">XYRON DEVELOPMENT</p>
+          <p className="section-label text-center mb-3">YAKUZA DEVELOPMENT</p>
           <h1 className="text-4xl md:text-6xl font-display font-bold text-center text-foreground mb-4">
             The Team
           </h1>
           <p className="text-center text-muted-foreground mb-12">
-            {team.length} people building and maintaining the Noxx ecosystem
+            {team.length} people building and maintaining the Yakuza ecosystem
           </p>
 
           {categories.map((cat) => {

@@ -1,5 +1,5 @@
-import { Bot } from "lucide-react";
 import { Link } from "react-router-dom";
+import YakuzaLogo from "@/assets/yakuza-logo.png";
 
 const Footer = () => {
   return (
@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 font-display font-bold text-lg text-foreground mb-3">
-              <Bot className="w-5 h-5 text-noxx-purple" />
-              Noxx
+              <img src={YakuzaLogo} alt="Yakuza" className="w-6 h-6 rounded-full" />
+              Yakuza
             </div>
             <p className="text-sm text-muted-foreground">
               A powerful Discord bot that brings advanced features and seamless automation to your server.
@@ -41,8 +41,8 @@ const Footer = () => {
         </div>
 
         <div className="mt-10 pt-6 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2026 Noxx. All rights reserved.</p>
-          <p>Made with ❤️ by the Noxx Team</p>
+          <p>© 2026 Yakuza. All rights reserved.</p>
+          <p>Made with ❤️ by the Yakuza Team</p>
         </div>
       </div>
     </footer>

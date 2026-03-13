@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Bot, ArrowRight, Sparkles, Shield, Zap, Code, MessageSquare, Users, Server, Clock, Activity, ChevronRight, Star, Music, Gift, Wrench, BarChart3, Lightbulb, Image, Settings, Gamepad2 } from "lucide-react";
 import Layout from "@/components/Layout";
+import YakuzaLogo from "@/assets/yakuza-logo.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -81,7 +82,7 @@ const Index = () => {
             transition={{ delay: 0.1 }}
             className="text-6xl md:text-8xl font-display font-bold text-gradient mb-6"
           >
-            Noxx
+            Yakuza
           </motion.h1>
 
           <motion.p
@@ -100,10 +101,10 @@ const Index = () => {
             transition={{ delay: 0.3 }}
             className="mb-6"
           >
-            <div className="w-32 h-32 mx-auto rounded-full border-2 border-noxx-purple/50 overflow-hidden shadow-lg shadow-noxx-purple/20">
+            <div className="w-32 h-32 mx-auto rounded-full border-2 border-noxx-red/50 overflow-hidden shadow-lg shadow-noxx-red/20">
               <img
-                src="https://i.ibb.co/qMP6B9Qc/eef0b18c703b4e9bcf4ba5abdae4c4b2.webp"
-                alt="Noxx avatar"
+                src={YakuzaLogo}
+                alt="Yakuza avatar"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -283,7 +284,7 @@ const Index = () => {
           <p className="section-label text-center mb-3">COMMUNITY VOICE</p>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-foreground mb-4">Trusted by Amazing Communities</h2>
           <p className="text-center text-muted-foreground max-w-xl mx-auto mb-12">
-            See what server owners and moderators are saying about Noxx.
+            See what server owners and moderators are saying about Yakuza.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {testimonials.map((t, i) => (

@@ -40,10 +40,12 @@
     --gradient-purple: 250 60% 55%;
     --gradient-pink: 330 70% 55%;
     --gradient-yellow: 45 100% 60%;
+    --gradient-red: 0 80% 45%;
 
     --glow-green: 0 0 30px hsl(142 70% 45% / 0.3);
     --glow-purple: 0 0 30px hsl(250 60% 55% / 0.3);
     --glow-pink: 0 0 30px hsl(330 70% 55% / 0.3);
+    --glow-red: 0 0 30px hsl(0 80% 45% / 0.3);
 
     --sidebar-background: 222 47% 6%;
     --sidebar-foreground: 210 40% 96%;

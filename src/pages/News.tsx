@@ -13,8 +13,8 @@ const News = () => {
             animate={{ opacity: 1, scale: 1 }}
             className="mb-6"
           >
-            <div className="w-16 h-16 mx-auto rounded-2xl bg-noxx-purple/10 border border-noxx-purple/30 flex items-center justify-center">
-              <Bot className="w-8 h-8 text-noxx-purple" />
+            <div className="w-16 h-16 mx-auto rounded-2xl bg-noxx-red/10 border border-noxx-red/30 flex items-center justify-center">
+              <Bot className="w-8 h-8 text-noxx-red" />
             </div>
           </motion.div>
 
