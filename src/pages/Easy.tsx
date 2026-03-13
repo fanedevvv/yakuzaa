@@ -81,18 +81,24 @@ const Easy = () => {
       {/* About */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-display font-bold text-center text-foreground mb-2">
-            About <span className="text-noxx-red">Easy-Code</span>
-          </h2>
-          <div className="w-16 h-1 bg-noxx-red mx-auto rounded mb-8" />
-          <div className="glass-card p-6 mb-6">
-            <p className="text-muted-foreground">
-              Easy-Code is a thriving <span className="text-noxx-red font-semibold">resources forum</span> of developers, gamers and passionates. We have all kind of resources, leaks and fun stuff.
+          <AnimatedSection>
+            <h2 className="text-3xl font-display font-bold text-center text-foreground mb-2">
+              About <span className="text-noxx-red">Easy-Code</span>
+            </h2>
+            <div className="w-16 h-1 bg-noxx-red mx-auto rounded mb-8" />
+          </AnimatedSection>
+          <AnimatedSection direction="left" delay={0.1}>
+            <div className="glass-card p-6 mb-6">
+              <p className="text-muted-foreground">
+                Easy-Code is a thriving <span className="text-noxx-red font-semibold">resources forum</span> of developers, gamers and passionates. We have all kind of resources, leaks and fun stuff.
+              </p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection direction="right" delay={0.15}>
+            <p className="text-muted-foreground text-center">
+              We unite people across the digital landscape, sharing epic moments, make new <span className="text-noxx-red font-semibold">dreams</span> and fostering a friendly and welcoming environment for all skill levels. Join Easy-Code to access quality resources in game dev, web dev, scripting, design and more. Connect with other creators and level up your project.
             </p>
-          </div>
-          <p className="text-muted-foreground text-center">
-            We unite people across the digital landscape, sharing epic moments, make new <span className="text-noxx-red font-semibold">dreams</span> and fostering a friendly and welcoming environment for all skill levels. Join Easy-Code to access quality resources in game dev, web dev, scripting, design and more. Connect with other creators and level up your project.
-          </p>
+          </AnimatedSection>
         </div>
       </section>
 
