@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink, Users, Percent, Award, Clock, MessageSquare, Gamepad2, Palette, Shield, Gift, Code } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const metrics = [
   { value: "4000+", label: "Total Members" },
