@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Code, Bot, Clock, Sparkles, Globe } from "lucide-react";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const stats = [
   { icon: Code, value: "50k+", label: "LINES OF CODE" },
