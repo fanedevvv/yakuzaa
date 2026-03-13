@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import KanjiBackground from "./KanjiBackground";
 import ScrollToTop from "./ScrollToTop";
+import PageMeta from "./PageMeta";
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -25,6 +26,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="min-h-screen text-foreground relative">
+      <PageMeta />
       <KanjiBackground />
       <Navbar />
       <AnimatePresence mode="wait">
