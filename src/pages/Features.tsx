@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Shield, Settings, Music, Coins, Wrench, Gift, MessageSquare, Activity, Lightbulb, Gamepad2, Image, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const features = [
   {
