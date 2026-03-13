@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Users, Code, Menu, X, ChevronDown, Shield } from "lucide-react";
+import { Users, Menu, X, ChevronDown, Shield } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import YakuzaLogo from "@/assets/yakuza-logo.png";
