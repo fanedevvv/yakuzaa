@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { Bot, ArrowRight, Sparkles, Shield, Settings, Music, BarChart3, Wrench, Gift, MessageSquare, Activity, Lightbulb, Gamepad2, Image, CheckCircle2 } from "lucide-react";
+import { Bot, ArrowRight, Sparkles, Shield, Settings, Music, BarChart3, Wrench, Gift, MessageSquare, Activity, Lightbulb, Gamepad2, Image, CheckCircle2, Users, Server } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import YakuzaLogo from "@/assets/yakuza-logo.png";
+import { useDiscordBotStats } from "@/hooks/useDiscordBotStats";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -41,6 +42,7 @@ const testimonials = [
 ];
 
 const Index = () => {
+  const { data: botStats } = useDiscordBotStats();
   return (
     <Layout>
       {/* Hero */}
@@ -105,8 +107,13 @@ const Index = () => {
               <span className="w-2.5 h-2.5 rounded-full bg-noxx-green animate-pulse" />
               <span className="text-sm text-muted-foreground">Online & Ready</span>
             </span>
-            <span className="px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-noxx-red">
-              8+ Servers
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-noxx-red">
+              <Server className="w-3.5 h-3.5" />
+              {botStats?.servers ?? "..."} Servers
+            </span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-muted-foreground">
+              <Users className="w-3.5 h-3.5" />
+              {botStats?.totalMembers ? botStats.totalMembers.toLocaleString() : "..."} Members
             </span>
           </motion.div>
 
