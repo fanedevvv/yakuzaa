@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom"; 
 import {
-  Menu, X, ChevronDown, Shield, LayoutGrid, Zap, Settings, Hash,
+  Menu, X, ChevronDown, Shield, LayoutGrid, Settings, Hash,
   Diamond, Activity, Monitor, Crown, Code, Users, Sparkles,
-  MessageCircle, FileText, HelpCircle,
+  MessageCircle, FileText, HelpCircle, Check,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
