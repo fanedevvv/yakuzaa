@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { Bot, Star, Monitor, Menu, X } from "lucide-react";
+import { Star, Monitor, Menu, X } from "lucide-react";
 import { useState } from "react";
+import YakuzaLogo from "@/assets/yakuza-logo.png";
 
 const navLinks = [
   { label: "Main", path: "/" },
