@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { Bot, ArrowRight, Sparkles, Shield, Settings, Music, BarChart3, Wrench, Gift, MessageSquare, Activity, Lightbulb, Gamepad2, Image, CheckCircle2 } from "lucide-react";
+import { Bot, ArrowRight, Sparkles, Shield, Settings, Music, BarChart3, Wrench, Gift, MessageSquare, Activity, Lightbulb, Gamepad2, Image, CheckCircle2, Users, Server } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import YakuzaLogo from "@/assets/yakuza-logo.png";
+import { useDiscordBotStats } from "@/hooks/useDiscordBotStats";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
