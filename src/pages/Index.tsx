@@ -82,7 +82,7 @@ const Index = () => {
             transition={{ delay: 0.1 }}
             className="text-6xl md:text-8xl font-display font-bold text-gradient mb-6"
           >
-            Noxx
+            Yakuza
           </motion.h1>
 
           <motion.p
