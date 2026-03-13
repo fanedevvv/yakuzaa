@@ -103,7 +103,7 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="flex items-center justify-center gap-3 mb-10 mt-6"
+            className="flex items-center justify-center gap-3 mb-10 mt-6 flex-wrap"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-noxx-red">
               <Server className="w-3.5 h-3.5" />
@@ -112,6 +112,10 @@ const Index = () => {
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-muted-foreground">
               <Users className="w-3.5 h-3.5" />
               {botStats?.totalMembers ? botStats.totalMembers.toLocaleString() : "..."} Members
+            </span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-muted-foreground">
+              <Command className="w-3.5 h-3.5" />
+              {botCommands?.totalFlattened ? botCommands.totalFlattened.toLocaleString() : "..."} Commands
             </span>
           </motion.div>
 
