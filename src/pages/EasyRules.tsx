@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { BookOpen, ArrowLeft, CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const rules = [
   { title: "Respect Everyone", desc: "Treat all members with respect and kindness. Harassment, bullying, or discrimination of any kind will not be tolerated." },
