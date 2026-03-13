@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const faqs = [
