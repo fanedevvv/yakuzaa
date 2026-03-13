@@ -85,7 +85,7 @@ const Index = () => {
               <img
                 src={YakuzaLogo}
                 alt="Yakuza Bot"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover scale-125"
               />
             </div>
             <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 rounded-full bg-card/80 border border-border/50 backdrop-blur-sm">
