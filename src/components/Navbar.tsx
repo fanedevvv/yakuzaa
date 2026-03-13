@@ -292,10 +292,11 @@ const Navbar = () => {
                   {user ? "Staff Panel" : "Staff Login"}
                 </Link>
                 <a
-                  href="#"
+                  href="https://dashboard.yakuza.my"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-muted text-foreground border border-border text-sm font-medium"
                 >
-                  <Code className="w-4 h-4" />
                   Dashboard
                 </a>
               </div>
