@@ -3,6 +3,7 @@ import { Clock, Users, Server, MessageSquare, Layers, RefreshCw, Activity, Trend
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 import { AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { useDiscordBotStats } from "@/hooks/useDiscordBotStats";
 
