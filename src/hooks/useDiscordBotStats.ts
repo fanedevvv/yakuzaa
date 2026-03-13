@@ -34,7 +34,9 @@ export const useDiscordBotStats = () => {
       if (error) throw error;
       return data as DiscordBotStats;
     },
-    refetchInterval: 60000, // refresh every 60s
+    networkMode: "always",
+    retry: 1,
+    refetchInterval: 60000,
     staleTime: 30000,
   });
 };
