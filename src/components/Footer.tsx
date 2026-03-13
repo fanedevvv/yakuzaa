@@ -8,8 +8,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 font-display font-bold text-lg text-foreground mb-3">
-              <Bot className="w-5 h-5 text-noxx-purple" />
-              Noxx
+              <img src={YakuzaLogo} alt="Yakuza" className="w-6 h-6 rounded-full" />
+              Yakuza
             </div>
             <p className="text-sm text-muted-foreground">
               A powerful Discord bot that brings advanced features and seamless automation to your server.
