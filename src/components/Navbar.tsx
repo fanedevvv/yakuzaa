@@ -250,7 +250,7 @@ const Navbar = () => {
                         {category.label}
                       </p>
                       {category.items.map((item) => (
-                        <MobileMenuItem key={item.path} item={item} onClose={closeMobile} />
+                        <MobileMenuItem key={item.path} item={item} onClose={closeMobile} isActive={!item.external && location.pathname === item.path} />
                       ))}
                     </div>
                   ))}
