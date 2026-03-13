@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import ParticleBackground from "./ParticleBackground";
+import KanjiBackground from "./KanjiBackground";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      <ParticleBackground />
+      <KanjiBackground />
       <Navbar />
       <main className="relative z-10">{children}</main>
       <Footer />

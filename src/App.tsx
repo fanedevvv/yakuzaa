@@ -30,8 +30,8 @@ const App = () => (
           <Route path="/devs" element={<Devs />} />
           <Route path="/support" element={<Support />} />
           <Route path="/f34r" element={<F34R />} />
-          <Route path="/info" element={<NotFound />} />
-          <Route path="/community" element={<NotFound />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/status" element={<Status />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
