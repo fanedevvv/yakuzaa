@@ -26,6 +26,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="min-h-screen text-foreground relative">
+      <PageMeta />
       <KanjiBackground />
       <Navbar />
       <AnimatePresence mode="wait">
