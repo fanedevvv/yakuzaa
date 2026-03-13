@@ -124,12 +124,12 @@ const Index = () => {
             <span className="text-sm font-semibold text-noxx-purple">52+ Servers</span>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Row 1 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-wrap justify-center gap-3"
+            className="flex flex-wrap justify-center gap-3 mb-3"
           >
             <a href="#" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-btn-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
               <Bot className="w-4 h-4" />
@@ -141,9 +141,33 @@ const Index = () => {
               View Commands
               <ArrowRight className="w-4 h-4" />
             </a>
-            <a href="/partners" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-btn-accent text-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
+            <a href="#" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-btn-accent text-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
+              <Sparkles className="w-4 h-4" />
+              Visit F34R.mp4!
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </motion.div>
+
+          {/* CTA Buttons - Row 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex flex-wrap justify-center gap-3"
+          >
+            <a href="/partners" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-btn-secondary text-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
               <Star className="w-4 h-4" />
               Our Partners
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <a href="/news" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-btn-accent text-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
+              <MessageSquare className="w-4 h-4" />
+              Latest News
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <a href="/devs" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-btn-secondary text-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
+              <Users className="w-4 h-4" />
+              Meet the Devs
               <ArrowRight className="w-4 h-4" />
             </a>
           </motion.div>
