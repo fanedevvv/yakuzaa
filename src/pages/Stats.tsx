@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
-import { Clock, Users, Server, MessageSquare, Layers, RefreshCw, Activity, Globe, Cpu, HardDrive, Database, Wifi, Shield, Bot, TrendingUp, Zap } from "lucide-react";
+import { Clock, Users, Server, MessageSquare, Layers, RefreshCw, Activity, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
-import { AreaChart, Area, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import { AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import { useDiscordBotStats } from "@/hooks/useDiscordBotStats";
 
 const Stats = () => {
+  const { data: botStats, isLoading, refetch } = useDiscordBotStats();
   const [uptime, setUptime] = useState({ days: 0, hours: 1, minutes: 0, seconds: 4 });
 
   useEffect(() => {
@@ -24,17 +26,23 @@ const Stats = () => {
 
   const pad = (n: number) => String(n).padStart(2, "0");
 
+  const serverCount = botStats?.servers ?? 0;
+  const totalMembers = botStats?.totalMembers ?? 0;
+  const shardCount = botStats?.shards ?? 1;
+  const sessionsRemaining = botStats?.sessionStartLimit?.remaining ?? 0;
+  const sessionsTotal = botStats?.sessionStartLimit?.total ?? 0;
+
   const statCards = [
-    { icon: Users, value: "874+", label: "Total Users", desc: "Users across all servers", color: "text-noxx-red" },
-    { icon: Server, value: "8+", label: "Active Servers", desc: "Discord servers using Yakuza", color: "text-noxx-red" },
-    { icon: MessageSquare, value: "213+", label: "Channels", desc: "Monitored text & voice channels", color: "text-noxx-red" },
-    { icon: Layers, value: "1+", label: "Shards", desc: "Active bot instances", color: "text-noxx-red" },
+    { icon: Users, value: `${totalMembers}+`, label: "Total Users", desc: "Users across all servers", color: "text-noxx-red" },
+    { icon: Server, value: `${serverCount}`, label: "Active Servers", desc: "Discord servers using Yakuza", color: "text-noxx-red" },
+    { icon: Layers, value: `${shardCount}`, label: "Shards", desc: "Active bot instances", color: "text-noxx-red" },
+    { icon: MessageSquare, value: `${sessionsRemaining}/${sessionsTotal}`, label: "Gateway Sessions", desc: "Remaining session starts", color: "text-noxx-red" },
   ];
 
   const historicalStats = [
-    { label: "Server Growth", value: "+0.0%", sub: "last 30 days", icon: Server },
-    { label: "User Growth", value: "+0.3%", sub: "last 30 days", icon: Users },
-    { label: "Avg Latency", value: "45ms", sub: "Excellent", icon: Activity, subColor: "text-noxx-green" },
+    { label: "Server Count", value: `${serverCount}`, sub: "live", icon: Server },
+    { label: "Total Members", value: `${totalMembers}`, sub: "live", icon: Users },
+    { label: "Shards", value: `${shardCount}`, sub: "Active", icon: Activity, subColor: "text-noxx-green" },
     { label: "Uptime", value: "99.9%", sub: "This month", icon: Clock },
   ];
 
@@ -47,18 +55,16 @@ const Stats = () => {
     { label: "CPU", value: "16 vCPU Cores" },
     { label: "RAM", value: "32 GB" },
     { label: "Storage", value: "800 GB NVMe" },
-    { label: "Network", value: "N/A" },
-    { label: "IPv4/IPv6", value: "N/A" },
     { label: "DDoS Protection", value: "Disabled" },
-    { label: "Virtualization", value: "N/A" },
   ];
 
   const sysInfo = [
-    { label: "Bot Username", value: "@Yakuza" },
-    { label: "Bot ID", value: "1327396106565476392" },
+    { label: "Bot Username", value: botStats?.bot?.username ? `@${botStats.bot.username}` : "Loading..." },
+    { label: "Bot ID", value: botStats?.bot?.id ?? "Loading..." },
+    { label: "Discriminator", value: botStats?.bot?.discriminator ?? "Loading..." },
     { label: "Node.js", value: "v20.18.1" },
     { label: "Discord.js", value: "v14.16.3" },
-    { label: "Gateway Sessions", value: "989 / 1000 remaining" },
+    { label: "Gateway Sessions", value: `${sessionsRemaining} / ${sessionsTotal} remaining` },
   ];
 
   const perfCards = [
@@ -78,8 +84,11 @@ const Stats = () => {
               <span className="w-2 h-2 rounded-full bg-noxx-red animate-pulse" />
               LIVE
             </span>
-            <button className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted text-sm text-foreground hover:bg-muted/80 transition-colors">
-              <RefreshCw className="w-3.5 h-3.5" />
+            <button
+              onClick={() => refetch()}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted text-sm text-foreground hover:bg-muted/80 transition-colors"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin" : ""}`} />
               Refresh
             </button>
           </div>
@@ -136,12 +145,40 @@ const Stats = () => {
                 <div className="w-10 h-10 rounded-xl bg-noxx-red/10 flex items-center justify-center mb-3">
                   <stat.icon className="w-5 h-5 text-noxx-red" />
                 </div>
-                <p className="text-3xl font-bold text-foreground">{stat.value}</p>
+                <p className="text-3xl font-bold text-foreground">{isLoading ? "..." : stat.value}</p>
                 <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
                 <p className="text-xs text-muted-foreground/70 mt-1">{stat.desc}</p>
               </motion.div>
             ))}
           </div>
+
+          {/* Guilds List */}
+          {botStats?.guilds && botStats.guilds.length > 0 && (
+            <div className="max-w-4xl mx-auto mb-10">
+              <h2 className="text-xl font-bold text-foreground mb-4">Servers ({botStats.guilds.length})</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {botStats.guilds.map((guild) => (
+                  <div key={guild.id} className="glass-card p-4 flex items-center gap-4">
+                    {guild.icon ? (
+                      <img
+                        src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${guild.icon.startsWith('a_') ? 'gif' : 'png'}?size=64`}
+                        alt={guild.name}
+                        className="w-10 h-10 rounded-full"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-sm font-bold text-muted-foreground">
+                        {guild.name.charAt(0)}
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-foreground truncate">{guild.name}</p>
+                      <p className="text-xs text-muted-foreground">{guild.memberCount} members</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Historical Data */}
           <div className="max-w-4xl mx-auto mb-10">
@@ -151,7 +188,7 @@ const Stats = () => {
               </div>
               <div>
                 <h2 className="text-xl font-bold text-foreground">Historical Data</h2>
-                <p className="text-xs text-muted-foreground">Real data from database</p>
+                <p className="text-xs text-muted-foreground">Live data from Discord API</p>
               </div>
             </div>
 
@@ -162,22 +199,21 @@ const Stats = () => {
                     <p className="text-sm text-muted-foreground">{s.label}</p>
                     <s.icon className="w-4 h-4 text-muted-foreground" />
                   </div>
-                  <p className="text-2xl font-bold text-foreground">{s.value}</p>
+                  <p className="text-2xl font-bold text-foreground">{isLoading ? "..." : s.value}</p>
                   <p className={`text-xs ${s.subColor || "text-muted-foreground"}`}>{s.sub}</p>
                 </div>
               ))}
             </div>
 
-            {/* Real Charts */}
+            {/* Charts */}
             <div className="grid md:grid-cols-2 gap-4 mb-6">
-              {/* Server Growth */}
               <div className="glass-card p-5">
                 <h3 className="text-sm font-semibold text-foreground mb-4">Server Growth</h3>
                 <div className="h-40">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={[
                       { month: "Oct", servers: 2 }, { month: "Nov", servers: 3 }, { month: "Dec", servers: 4 },
-                      { month: "Jan", servers: 5 }, { month: "Feb", servers: 6 }, { month: "Mar", servers: 8 },
+                      { month: "Jan", servers: 5 }, { month: "Feb", servers: 6 }, { month: "Mar", servers: serverCount },
                     ]}>
                       <defs>
                         <linearGradient id="serverGrad" x1="0" y1="0" x2="0" y2="1">
@@ -195,14 +231,13 @@ const Stats = () => {
                 </div>
               </div>
 
-              {/* User Growth */}
               <div className="glass-card p-5">
                 <h3 className="text-sm font-semibold text-foreground mb-4">User Growth</h3>
                 <div className="h-40">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={[
                       { month: "Oct", users: 120 }, { month: "Nov", users: 280 }, { month: "Dec", users: 410 },
-                      { month: "Jan", users: 550 }, { month: "Feb", users: 720 }, { month: "Mar", users: 874 },
+                      { month: "Jan", users: 550 }, { month: "Feb", users: 720 }, { month: "Mar", users: totalMembers || 874 },
                     ]}>
                       <defs>
                         <linearGradient id="userGrad" x1="0" y1="0" x2="0" y2="1">
@@ -220,7 +255,6 @@ const Stats = () => {
                 </div>
               </div>
 
-              {/* API Latency (24h) */}
               <div className="glass-card p-5">
                 <h3 className="text-sm font-semibold text-foreground mb-4">API Latency (24h)</h3>
                 <div className="h-40">
@@ -239,7 +273,6 @@ const Stats = () => {
                 </div>
               </div>
 
-              {/* Uptime Distribution */}
               <div className="glass-card p-5">
                 <h3 className="text-sm font-semibold text-foreground mb-4">Uptime Distribution</h3>
                 <div className="h-40 flex items-center justify-center">
