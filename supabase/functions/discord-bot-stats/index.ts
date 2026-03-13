@@ -29,8 +29,8 @@ serve(async (req) => {
     const botData = await botRes.json();
     if (!botRes.ok) throw new Error(`Bot user fetch failed: ${JSON.stringify(botData)}`);
 
-    // Fetch bot's guilds (servers)
-    const guildsRes = await fetch('https://discord.com/api/v10/users/@me/guilds', { headers });
+    // Fetch bot's guilds with member counts
+    const guildsRes = await fetch('https://discord.com/api/v10/users/@me/guilds?with_counts=true', { headers });
     const guildsData = await guildsRes.json();
     if (!guildsRes.ok) throw new Error(`Guilds fetch failed: ${JSON.stringify(guildsData)}`);
 
@@ -44,31 +44,15 @@ serve(async (req) => {
     const guildDetails = [];
 
     for (const guild of guildsData) {
-      totalMembers += guild.approximate_member_count || 0;
+      const memberCount = guild.approximate_member_count ?? 0;
+      totalMembers += memberCount;
       guildDetails.push({
         id: guild.id,
         name: guild.name,
         icon: guild.icon,
-        memberCount: guild.approximate_member_count || 0,
+        memberCount,
         owner: guild.owner || false,
       });
-    }
-
-    // Fetch guilds with counts for accurate member data
-    const guildsWithCountsRes = await fetch('https://discord.com/api/v10/users/@me/guilds?with_counts=true', { headers });
-    const guildsWithCounts = await guildsWithCountsRes.json();
-    if (guildsWithCountsRes.ok) {
-      totalMembers = 0;
-      for (const g of guildsWithCounts) {
-        totalMembers += g.approximate_member_count || 0;
-      }
-      // Update guild details with accurate counts
-      for (let i = 0; i < guildDetails.length; i++) {
-        const match = guildsWithCounts.find((g: any) => g.id === guildDetails[i].id);
-        if (match) {
-          guildDetails[i].memberCount = match.approximate_member_count || 0;
-        }
-      }
     }
 
     const result = {
