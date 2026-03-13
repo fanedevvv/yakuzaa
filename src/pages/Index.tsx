@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Bot, ArrowRight, Sparkles, Shield, Zap, Code, MessageSquare, Users, Server, Clock, Activity, ChevronRight, Star, Music, Gift, Wrench, BarChart3, Lightbulb, Image, Settings, Gamepad2 } from "lucide-react";
+import { Bot, ArrowRight, Sparkles, Shield, Zap, Code, MessageSquare, Users, Server, Clock, Activity, ChevronRight, Star, Music, Gift, Wrench, BarChart3, Lightbulb, Image, Settings, Gamepad2, Wifi, Hash, Terminal, Cpu, CheckCircle2 } from "lucide-react";
 import Layout from "@/components/Layout";
 import YakuzaLogo from "@/assets/yakuza-logo.png";
 
