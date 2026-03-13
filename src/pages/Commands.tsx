@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, Crown, Shield, Coins, Gavel, Music, Gamepad2, Wrench, TrendingUp, Gift, MessageSquare, Heart, ScrollText, ImageIcon, Bot, Users, Swords, Zap, Radio, Bell, Lock, Megaphone, Cog, Loader2, RefreshCw } from "lucide-react";
 import Layout from "@/components/Layout";
+import AnimatedSection from "@/components/AnimatedSection";
 import { useDiscordBotCommands, BotCommand } from "@/hooks/useDiscordBotCommands";
 
 // Map parentName to category info
