@@ -103,10 +103,6 @@ const Index = () => {
             transition={{ delay: 0.4 }}
             className="flex items-center justify-center gap-3 mb-10 mt-6"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50">
-              <span className="w-2.5 h-2.5 rounded-full bg-noxx-green animate-pulse" />
-              <span className="text-sm text-muted-foreground">Online & Ready</span>
-            </span>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/40 border border-border/50 text-sm font-semibold text-noxx-red">
               <Server className="w-3.5 h-3.5" />
               {botStats?.servers ?? "..."} Servers
