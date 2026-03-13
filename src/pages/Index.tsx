@@ -284,7 +284,7 @@ const Index = () => {
           <p className="section-label text-center mb-3">COMMUNITY VOICE</p>
           <h2 className="text-3xl md:text-4xl font-display font-bold text-center text-foreground mb-4">Trusted by Amazing Communities</h2>
           <p className="text-center text-muted-foreground max-w-xl mx-auto mb-12">
-            See what server owners and moderators are saying about Noxx.
+            See what server owners and moderators are saying about Yakuza.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {testimonials.map((t, i) => (
