@@ -191,6 +191,7 @@ const Navbar = () => {
               isOpen={openMenu === menu.label}
               onToggle={() => setOpenMenu(openMenu === menu.label ? null : menu.label)}
               onClose={() => setOpenMenu(null)}
+              currentPath={location.pathname}
             />
           ))}
         </div>
