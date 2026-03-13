@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Users, Menu, X, ChevronDown, Shield } from "lucide-react";
+import { Menu, X, ChevronDown, Shield } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import YakuzaLogo from "@/assets/yakuza-logo.png";
@@ -220,7 +220,7 @@ const Navbar = () => {
             to="/admin"
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-noxx-red/10 text-noxx-red border border-noxx-red/30 text-sm font-medium hover:bg-noxx-red/20 transition-colors"
           >
-            <Users className="w-4 h-4" />
+            
             {user ? "Staff Panel" : "Staff Login"}
           </Link>
           <a
@@ -288,7 +288,7 @@ const Navbar = () => {
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-noxx-red/10 text-noxx-red border border-noxx-red/30 text-sm font-medium"
                 >
-                  <Users className="w-4 h-4" />
+                  
                   {user ? "Staff Panel" : "Staff Login"}
                 </Link>
                 <a
