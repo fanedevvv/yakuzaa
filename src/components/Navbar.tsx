@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { Users, Code, Menu, X, ChevronDown } from "lucide-react";
+import { Users, Code, Menu, X, ChevronDown, Shield } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import YakuzaLogo from "@/assets/yakuza-logo.png";
+import { useAuth } from "@/hooks/useAuth";
 
 const navMenus = [
   {
