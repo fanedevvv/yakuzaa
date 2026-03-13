@@ -10,6 +10,9 @@ import News from "./pages/News.tsx";
 import Devs from "./pages/Devs.tsx";
 import Features from "./pages/Features.tsx";
 import Status from "./pages/Status.tsx";
+import Docs from "./pages/Docs.tsx";
+import Fane from "./pages/Fane.tsx";
+import Easy from "./pages/Easy.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -28,6 +31,9 @@ const App = () => (
           <Route path="/devs" element={<Devs />} />
           <Route path="/features" element={<Features />} />
           <Route path="/status" element={<Status />} />
+          <Route path="/docs" element={<Docs />} />
+          <Route path="/fane" element={<Fane />} />
+          <Route path="/easy" element={<Easy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
