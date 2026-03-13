@@ -10,6 +10,10 @@ import News from "./pages/News.tsx";
 import Devs from "./pages/Devs.tsx";
 import Features from "./pages/Features.tsx";
 import Status from "./pages/Status.tsx";
+import Stats from "./pages/Stats.tsx";
+import Uptime from "./pages/Uptime.tsx";
+import Premium from "./pages/Premium.tsx";
+import FAQ from "./pages/FAQ.tsx";
 import Docs from "./pages/Docs.tsx";
 import Fane from "./pages/Fane.tsx";
 import Easy from "./pages/Easy.tsx";
@@ -31,6 +35,10 @@ const App = () => (
           <Route path="/devs" element={<Devs />} />
           <Route path="/features" element={<Features />} />
           <Route path="/status" element={<Status />} />
+          <Route path="/stats" element={<Stats />} />
+          <Route path="/uptime" element={<Uptime />} />
+          <Route path="/premium" element={<Premium />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/docs" element={<Docs />} />
           <Route path="/fane" element={<Fane />} />
           <Route path="/easy" element={<Easy />} />
