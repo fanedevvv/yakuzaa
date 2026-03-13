@@ -126,14 +126,18 @@ const Easy = () => {
       {/* What We Offer */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">What We Offer</h2>
+          <AnimatedSection>
+            <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">What We Offer</h2>
+          </AnimatedSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {offers.map((item) => (
-              <div key={item.title} className="glass-card-hover p-5">
-                <item.icon className="w-6 h-6 text-noxx-red mb-3" />
-                <h3 className="font-display font-semibold text-foreground mb-1">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </div>
+            {offers.map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.08}>
+                <div className="glass-card-hover p-5 h-full">
+                  <item.icon className="w-6 h-6 text-noxx-red mb-3" />
+                  <h3 className="font-display font-semibold text-foreground mb-1">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
