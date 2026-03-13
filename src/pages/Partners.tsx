@@ -9,12 +9,14 @@ const Partners = () => {
     <Layout>
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-4" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
-            Sponsors & Partners
-          </h1>
-          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-16">
-            A proud showcase of the amazing bots and services that support and collaborate with our projects.
-          </p>
+          <AnimatedSection>
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-4" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
+              Sponsors & Partners
+            </h1>
+            <p className="text-center text-muted-foreground max-w-xl mx-auto mb-16">
+              A proud showcase of the amazing bots and services that support and collaborate with our projects.
+            </p>
+          </AnimatedSection>
 
           <h2 className="text-2xl font-display font-bold text-center text-noxx-red mb-8">Featured Partners</h2>
 
