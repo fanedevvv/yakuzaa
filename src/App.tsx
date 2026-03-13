@@ -8,6 +8,7 @@ import Commands from "./pages/Commands.tsx";
 import Partners from "./pages/Partners.tsx";
 import News from "./pages/News.tsx";
 import Devs from "./pages/Devs.tsx";
+import Support from "./pages/Support.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/partners" element={<Partners />} />
           <Route path="/news" element={<News />} />
           <Route path="/devs" element={<Devs />} />
+          <Route path="/support" element={<Support />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

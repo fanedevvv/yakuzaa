@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { Bot, ArrowRight } from "lucide-react";
+import { MessageSquare, ArrowRight, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 
-const News = () => {
+const Support = () => {
   return (
     <Layout>
       <section className="py-32 text-center">
@@ -14,7 +14,7 @@ const News = () => {
             className="mb-6"
           >
             <div className="w-16 h-16 mx-auto rounded-2xl bg-noxx-purple/10 border border-noxx-purple/30 flex items-center justify-center">
-              <Bot className="w-8 h-8 text-noxx-purple" />
+              <MessageSquare className="w-8 h-8 text-noxx-purple" />
             </div>
           </motion.div>
 
@@ -24,30 +24,38 @@ const News = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-display font-bold text-gradient mb-4"
           >
-            Coming Soon
+            Need Help?
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-muted-foreground mb-8"
+            className="text-muted-foreground max-w-xl mx-auto mb-8"
           >
-            We're working hard to bring you this feature. Stay tuned!
+            Join our Discord server to get support, report bugs, or chat with the community. We're here to help you out!
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
+            className="flex flex-col items-center gap-4"
           >
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-muted border border-border text-foreground font-semibold hover:bg-muted/80 transition-colors"
+            >
+              <MessageSquare className="w-5 h-5" />
+              Join Support Server
+              <ArrowRight className="w-4 h-4" />
+            </a>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
             >
-              <Bot className="w-4 h-4" />
+              <ArrowLeft className="w-4 h-4" />
               Back to Home
-              <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>
@@ -56,4 +64,4 @@ const News = () => {
   );
 };
 
-export default News;
+export default Support;

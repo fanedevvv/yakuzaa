@@ -5,8 +5,8 @@ import YakuzaLogo from "@/assets/yakuza-logo.png";
 
 const navLinks = [
   { label: "Main", path: "/" },
-  { label: "Info & Status", path: "/info" },
-  { label: "Community", path: "/community" },
+  { label: "Commands", path: "/commands" },
+  { label: "Partners", path: "/partners" },
   { label: "Support & Docs", path: "/support" },
 ];
 
