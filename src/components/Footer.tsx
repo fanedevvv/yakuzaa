@@ -55,7 +55,7 @@ const Footer = () => {
 
         <div className="mt-10 pt-6 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>© 2026 Yakuza Bot. All rights reserved.</p>
-          <p>Made with ❤️ by <a href="#" className="text-noxx-red hover:underline">Easy-Group Group</a></p>
+          <p>Made with ❤️ by <a href="https://easy-code.ro/" target="_blank" rel="noopener noreferrer" className="text-noxx-red hover:underline">Easy-Group Group</a></p>
         </div>
       </div>
     </footer>
