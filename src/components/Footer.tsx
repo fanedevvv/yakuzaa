@@ -1,5 +1,5 @@
-import { Bot } from "lucide-react";
 import { Link } from "react-router-dom";
+import YakuzaLogo from "@/assets/yakuza-logo.png";
 
 const Footer = () => {
   return (
