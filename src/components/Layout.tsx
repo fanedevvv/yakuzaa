@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import KanjiBackground from "./KanjiBackground";
 import ScrollToTop from "./ScrollToTop";
+import PageMeta from "./PageMeta";
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
