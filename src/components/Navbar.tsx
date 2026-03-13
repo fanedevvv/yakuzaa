@@ -101,6 +101,7 @@ const DropdownMenu = ({ menu, isOpen, onToggle, onClose }: {
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const { user, isAdmin } = useAuth();
 
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50">
