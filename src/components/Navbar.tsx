@@ -10,6 +10,7 @@ const navMenus = [
       { label: "Home", path: "/" },
       { label: "Commands", path: "/commands" },
       { label: "Features", path: "/features" },
+      { label: "Premium", path: "/premium" },
     ],
   },
   {
@@ -17,6 +18,8 @@ const navMenus = [
     items: [
       { label: "News & Updates", path: "/news" },
       { label: "Status", path: "/status" },
+      { label: "Statistics", path: "/stats" },
+      { label: "Uptime", path: "/uptime" },
     ],
   },
   {
@@ -24,14 +27,16 @@ const navMenus = [
     items: [
       { label: "Partners", path: "/partners" },
       { label: "Meet the Devs", path: "/devs" },
+      { label: "FanE", path: "/fane" },
+      { label: "Easy-Code", path: "/easy" },
       { label: "Discord Server", path: "https://discord.gg/a9Kea3ymC7", external: true },
     ],
   },
   {
     label: "Support & Docs",
     items: [
-      { label: "Support", path: "/support" },
-      { label: "Documentation", path: "/commands" },
+      { label: "Documentation", path: "/docs" },
+      { label: "FAQ", path: "/faq" },
     ],
   },
 ];
