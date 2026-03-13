@@ -101,10 +101,10 @@ const Index = () => {
             transition={{ delay: 0.3 }}
             className="mb-6"
           >
-            <div className="w-32 h-32 mx-auto rounded-full border-2 border-noxx-purple/50 overflow-hidden shadow-lg shadow-noxx-purple/20">
+            <div className="w-32 h-32 mx-auto rounded-full border-2 border-noxx-red/50 overflow-hidden shadow-lg shadow-noxx-red/20">
               <img
-                src="https://i.ibb.co/qMP6B9Qc/eef0b18c703b4e9bcf4ba5abdae4c4b2.webp"
-                alt="Noxx avatar"
+                src={YakuzaLogo}
+                alt="Yakuza avatar"
                 className="w-full h-full object-cover"
               />
             </div>
