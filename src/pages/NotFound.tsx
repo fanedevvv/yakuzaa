@@ -1,5 +1,5 @@
+import { Ghost, ArrowLeft, Home, Sparkles, Terminal } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { Ghost, ArrowLeft, Home } from "lucide-react";
 import Layout from "@/components/Layout";
 
 const NotFound = () => {
@@ -9,10 +9,17 @@ const NotFound = () => {
     <Layout>
       <section className="py-20 text-center">
         <div className="container mx-auto px-4">
-          <Ghost className="w-16 h-16 text-noxx-purple mx-auto mb-6" />
-          <h1 className="text-7xl md:text-9xl font-display font-bold text-foreground mb-4">404</h1>
+          <div className="mb-6">
+            <div className="w-20 h-20 mx-auto rounded-full bg-noxx-red/10 border border-noxx-red/30 flex items-center justify-center mb-6">
+              <Ghost className="w-10 h-10 text-noxx-red" />
+            </div>
+          </div>
+
+          <h1 className="text-8xl md:text-9xl font-display font-bold text-noxx-red mb-2" style={{ textShadow: "0 0 60px hsl(0 80% 45% / 0.4)" }}>
+            404
+          </h1>
           <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">Page Not Found</h2>
-          <p className="text-muted-foreground max-w-lg mx-auto mb-8">
+          <p className="text-muted-foreground max-w-md mx-auto mb-8">
             Oops! It seems like you've ventured into uncharted territory. The page you're looking for doesn't exist or has been moved.
           </p>
 
@@ -21,28 +28,29 @@ const NotFound = () => {
               onClick={() => navigate(-1)}
               className="flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
             >
-              <ArrowLeft className="w-4 h-4" />
-              Go Back
+              <ArrowLeft className="w-4 h-4" /> Go Back
             </button>
-            <Link
-              to="/"
-              className="flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
-            >
-              <Home className="w-4 h-4" />
-              Return Home
+            <Link to="/" className="flex items-center gap-2 px-6 py-3 rounded-xl bg-noxx-red text-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20">
+              <Home className="w-4 h-4" /> Return Home
             </Link>
           </div>
 
-          <div className="glass-card p-8 max-w-2xl mx-auto">
-            <h3 className="font-display font-semibold text-foreground mb-6">You might want to check out:</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Link to="/commands" className="glass-card-hover p-5 text-center block">
-                <h4 className="font-display font-semibold text-foreground mb-1">Commands</h4>
+          <div className="max-w-2xl mx-auto">
+            <h3 className="font-display font-semibold text-foreground mb-4">You might want to check out:</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Link to="/commands" className="glass-card-hover p-5 text-left">
+                <div className="flex items-center gap-3 mb-2">
+                  <Terminal className="w-5 h-5 text-noxx-red" />
+                  <h4 className="font-display font-semibold text-foreground">Commands</h4>
+                </div>
                 <p className="text-sm text-muted-foreground">Browse our comprehensive list of bot commands</p>
               </Link>
-              <Link to="/partners" className="glass-card-hover p-5 text-center block">
-                <h4 className="font-display font-semibold text-foreground mb-1">Partners</h4>
-                <p className="text-sm text-muted-foreground">Discover our partners and collaborations</p>
+              <Link to="/features" className="glass-card-hover p-5 text-left">
+                <div className="flex items-center gap-3 mb-2">
+                  <Sparkles className="w-5 h-5 text-noxx-red" />
+                  <h4 className="font-display font-semibold text-foreground">Features</h4>
+                </div>
+                <p className="text-sm text-muted-foreground">Discover all the powerful features Yakuza offers</p>
               </Link>
             </div>
           </div>

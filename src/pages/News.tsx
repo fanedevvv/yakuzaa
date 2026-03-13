@@ -1,55 +1,62 @@
 import { motion } from "framer-motion";
-import { Bot, ArrowRight } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+
+const newsItems = [
+  {
+    title: "Dashboard version 2.0.4 BETA",
+    date: "January 30, 2026",
+    desc: "We fixed some more bugs on dashboard, including music system and anti-spam system.",
+  },
+  {
+    title: "Bugs fixed",
+    date: "January 29, 2026",
+    desc: "We have remade the goodbye system and ticket system. They work 100%. Other updates are in preparation.",
+  },
+  {
+    title: "Up and running",
+    date: "January 19, 2026",
+    desc: "All Yakuza services, Yakuza Bot and Yakuza Dashboard is up and running.\nBoth is in beta, so every bug report is priceless for us.",
+  },
+];
 
 const News = () => {
   return (
     <Layout>
-      <section className="py-32 text-center">
+      <section className="py-20">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="mb-6"
-          >
-            <div className="w-16 h-16 mx-auto rounded-2xl bg-noxx-purple/10 border border-noxx-purple/30 flex items-center justify-center">
-              <Bot className="w-8 h-8 text-noxx-purple" />
-            </div>
-          </motion.div>
+          <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-4" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
+            Latest News
+          </h1>
+          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-16">
+            Stay updated with the latest announcements and updates from Yakuza
+          </p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-display font-bold text-gradient mb-4"
-          >
-            Coming Soon
-          </motion.h1>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {newsItems.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-card p-6"
+              >
+                <h2 className="font-display font-bold text-foreground text-xl mb-2">{item.title}</h2>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                  <Calendar className="w-4 h-4" />
+                  {item.date}
+                </div>
+                <p className="text-muted-foreground whitespace-pre-line">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-muted-foreground mb-8"
-          >
-            We're working hard to bring you this feature. Stay tuned!
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
-            >
-              <Bot className="w-4 h-4" />
-              Back to Home
-              <ArrowRight className="w-4 h-4" />
+          <div className="text-center mt-12">
+            <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">
+              ← Back to Home
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
     </Layout>
