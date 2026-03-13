@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 
 const partners = [
@@ -7,25 +8,29 @@ const partners = [
     name: "Tennessee State Roleplay",
     desc: "An immersive and fun ERLC roleplay server",
     tags: ["Active", "Immersive", "Fun"],
-    links: [{ label: "Website", url: "#" }],
+    links: [{ label: "Website", url: "https://youtube.com/@zhyperxdev" }],
+    invite: "https://discord.gg/AA5Abgxw3Z",
   },
   {
     name: "Yakuza",
-    desc: "Yakuza Bot - a multifunctional Discord bot with over 90 commands, systems and a cool dashboard",
+    desc: "Yakuza Bot - just another multifunctional Discord bot with over 90 commands, systems and a cool dashboard",
     tags: ["Discord Bot", "Multifunctional", "Dashboard"],
-    links: [{ label: "Website", url: "#" }, { label: "Dashboard", url: "#" }],
+    links: [{ label: "Website", url: "https://yakuza.my/" }, { label: "Dashboard", url: "https://dashboard.yakuza.my/" }],
+    invite: "https://yakuza.my/invite",
   },
   {
     name: "Omnix Bot",
     desc: "A powerful multipurpose Discord bot with advanced moderation, role systems, and automation tools.",
     tags: ["Discord Bot", "Moderation", "Utility"],
-    links: [{ label: "Website", url: "#" }, { label: "Dashboard", url: "#" }],
+    links: [{ label: "Website", url: "https://omnixbot.dev/" }, { label: "Dashboard", url: "https://omnixbot.dev/dashboard" }],
+    invite: "https://discord.com/oauth2/authorize?&client_id=865690661188927549&scope=applications.commands+bot+identify+guilds&permissions=4675449371774",
   },
   {
     name: "Kasumei Tickets",
     desc: "A fast and reliable ticketing bot designed for support teams and organized community systems.",
     tags: ["Tickets", "Support", "Utility"],
-    links: [{ label: "Website", url: "#" }, { label: "Dashboard", url: "#" }],
+    links: [{ label: "Website", url: "https://kasumei.com/" }, { label: "Dashboard", url: "https://kasumei.com/" }],
+    invite: "https://kasumei.com/invite",
   },
 ];
 
@@ -43,12 +48,15 @@ const Partners = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {partners.map((partner, i) => (
-              <motion.div
+              <motion.a
                 key={partner.name}
+                href={partner.invite}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="glass-card-hover p-6"
+                className="glass-card-hover p-6 block"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="p-2 rounded-lg bg-noxx-yellow/10">
@@ -62,6 +70,9 @@ const Partners = () => {
                     <a
                       key={link.label}
                       href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-muted border border-border text-sm text-foreground hover:bg-muted/80 transition-colors"
                     >
                       {link.label}
@@ -76,11 +87,17 @@ const Partners = () => {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
 
           <p className="text-center text-muted-foreground mt-12 text-sm">Supporting the community, one partnership at a time.</p>
+
+          <div className="text-center mt-6">
+            <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Go Back to home
+            </Link>
+          </div>
         </div>
       </section>
     </Layout>
