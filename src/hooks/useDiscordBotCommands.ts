@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 
 export interface BotCommand {
   name: string;
@@ -18,9 +17,24 @@ export const useDiscordBotCommands = () => {
   return useQuery<BotCommandsResponse>({
     queryKey: ["discord-bot-commands"],
     queryFn: async () => {
-      const { data, error } = await supabase.functions.invoke("discord-bot-commands");
-      if (error) throw error;
-      return data as BotCommandsResponse;
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/discord-bot-commands`, {
+          method: "GET",
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Commands request failed (${response.status}): ${errorText}`);
+        }
+
+        return (await response.json()) as BotCommandsResponse;
+      } finally {
+        clearTimeout(timeout);
+      }
     },
     networkMode: "always",
     retry: 1,
