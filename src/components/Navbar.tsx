@@ -61,13 +61,15 @@ const navMenus: NavCategory[] = [
 ];
 
 /* ── Desktop dropdown ── */
-const DropdownMenu = ({ menu, isOpen, onToggle, onClose }: {
+const DropdownMenu = ({ menu, isOpen, onToggle, onClose, currentPath }: {
   menu: NavCategory;
   isOpen: boolean;
   onToggle: () => void;
   onClose: () => void;
+  currentPath: string;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const hasActive = menu.items.some((i) => !i.external && currentPath === i.path);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -81,7 +83,11 @@ const DropdownMenu = ({ menu, isOpen, onToggle, onClose }: {
     <div ref={ref} className="relative">
       <button
         onClick={onToggle}
-        className="flex items-center gap-1 px-4 py-2 rounded-lg border border-border/50 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 hover:border-border transition-colors"
+        className={`flex items-center gap-1 px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
+          hasActive
+            ? "border-noxx-red/50 text-noxx-red bg-noxx-red/5"
+            : "border-border/50 text-muted-foreground hover:text-foreground hover:bg-muted/50 hover:border-border"
+        }`}
       >
         {menu.label}
         <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
@@ -97,30 +103,25 @@ const DropdownMenu = ({ menu, isOpen, onToggle, onClose }: {
           >
             {menu.items.map((item) => {
               const Icon = item.icon;
+              const active = !item.external && currentPath === item.path;
+              const cls = active
+                ? "flex items-center gap-2.5 px-4 py-2.5 text-sm text-foreground bg-muted/50 border-l-2 border-noxx-red transition-colors"
+                : "flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors";
+
               const content = (
-                <span className="flex items-center gap-2.5">
-                  <Icon className="w-4 h-4 text-muted-foreground" />
-                  {item.label}
-                </span>
+                <>
+                  <Icon className={`w-4 h-4 ${active ? "text-foreground" : "text-muted-foreground"}`} />
+                  <span className="flex-1">{item.label}</span>
+                  {active && <Check className="w-4 h-4 text-foreground" />}
+                </>
               );
+
               return item.external ? (
-                <a
-                  key={item.path}
-                  href={item.path}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onClose}
-                  className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-                >
+                <a key={item.path} href={item.path} target="_blank" rel="noopener noreferrer" onClick={onClose} className={cls}>
                   {content}
                 </a>
               ) : (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={onClose}
-                  className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-                >
+                <Link key={item.path} to={item.path} onClick={onClose} className={cls}>
                   {content}
                 </Link>
               );
@@ -190,6 +191,7 @@ const Navbar = () => {
               isOpen={openMenu === menu.label}
               onToggle={() => setOpenMenu(openMenu === menu.label ? null : menu.label)}
               onClose={() => setOpenMenu(null)}
+              currentPath={location.pathname}
             />
           ))}
         </div>
