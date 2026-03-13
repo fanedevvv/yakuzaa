@@ -84,14 +84,18 @@ const Fane = () => {
           </motion.div>
 
           {/* Stats */}
-          <h2 className="text-2xl font-display font-bold text-center text-foreground mb-6">My Coding Life at a Glance</h2>
+          <AnimatedSection>
+            <h2 className="text-2xl font-display font-bold text-center text-foreground mb-6">My Coding Life at a Glance</h2>
+          </AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            {stats.map((stat) => (
-              <div key={stat.label} className="glass-card p-5">
-                <stat.icon className="w-5 h-5 text-noxx-red mb-2" />
-                <div className="text-xl font-display font-bold text-foreground">{stat.value}</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
-              </div>
+            {stats.map((stat, i) => (
+              <AnimatedSection key={stat.label} delay={i * 0.08}>
+                <div className="glass-card p-5 h-full">
+                  <stat.icon className="w-5 h-5 text-noxx-red mb-2" />
+                  <div className="text-xl font-display font-bold text-foreground">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
 
