@@ -105,8 +105,8 @@
   }
 
   .glass-card-hover:hover {
-    border-color: hsl(var(--gradient-purple) / 0.4);
-    box-shadow: 0 0 20px hsl(var(--gradient-purple) / 0.1);
+    border-color: hsl(var(--gradient-red) / 0.4);
+    box-shadow: 0 0 20px hsl(var(--gradient-red) / 0.1);
   }
 
   .glow-text-green {
