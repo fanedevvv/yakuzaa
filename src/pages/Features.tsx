@@ -90,12 +90,10 @@ const Features = () => {
 
           <div className="max-w-4xl mx-auto space-y-8">
             {features.map((feat, i) => (
+              <AnimatedSection key={feat.title} delay={i * 0.05}>
               <motion.div
-                key={feat.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
+                whileHover={{ scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 300 }}
                 className="glass-card p-8"
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
