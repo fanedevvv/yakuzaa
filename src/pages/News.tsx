@@ -29,12 +29,14 @@ const News = () => {
     <Layout>
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-4" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
-            Latest News
-          </h1>
-          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-16">
-            Stay updated with the latest announcements and updates from Yakuza
-          </p>
+          <AnimatedSection>
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-4" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
+              Latest News
+            </h1>
+            <p className="text-center text-muted-foreground max-w-xl mx-auto mb-16">
+              Stay updated with the latest announcements and updates from Yakuza
+            </p>
+          </AnimatedSection>
 
           <div className="max-w-3xl mx-auto space-y-4">
             {newsItems.map((item, i) => (
