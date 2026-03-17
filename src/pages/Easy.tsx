@@ -197,9 +197,9 @@ const Easy = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-display font-bold text-foreground mb-4">Forge Your Code!</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mb-8">Don't just observe the adventure, live it. Become a part of the Easy-Code community today and dive into the grand, collaborative experience!</p>
+          <p className="text-muted-foreground max-w-xl mx-auto mb-8">Don't just observe the adventure, live it. Become a part of the Kaos Dev. community today and dive into the grand, collaborative experience!</p>
           <a href="https://easy-code.ro/discord" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-noxx-red text-foreground font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20">
-            Join Easy-Code <ExternalLink className="w-4 h-4" />
+            Join Kaos Dev. <ExternalLink className="w-4 h-4" />
           </a>
         </div>
       </section>
