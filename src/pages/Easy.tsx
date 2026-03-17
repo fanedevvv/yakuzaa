@@ -219,7 +219,7 @@ const Easy = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">Explore Our Bots</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="flex flex-col md:flex-row justify-center gap-4">
             {categories.map((cat) => (
               <div key={cat.title} className="glass-card-hover p-5">
                 <h3 className="font-display font-semibold text-foreground mb-2">{cat.title}</h3>
