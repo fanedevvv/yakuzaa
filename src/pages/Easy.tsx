@@ -96,7 +96,7 @@ const Easy = () => {
           </AnimatedSection>
           <AnimatedSection direction="right" delay={0.15}>
             <p className="text-muted-foreground text-center">
-              We unite people across the digital landscape, sharing epic moments, make new <span className="text-noxx-red font-semibold">dreams</span> and fostering a friendly and welcoming environment for all skill levels. Join Easy-Code to access quality resources in game dev, web dev, scripting, design and more. Connect with other creators and level up your project.
+              We unite people across the digital landscape, sharing epic moments, make new <span className="text-noxx-red font-semibold">dreams</span> and fostering a friendly and welcoming environment for all skill levels. Join Kaos Dev. to access quality resources in game dev, web dev, scripting, design and more. Connect with other creators and level up your project.
             </p>
           </AnimatedSection>
         </div>
