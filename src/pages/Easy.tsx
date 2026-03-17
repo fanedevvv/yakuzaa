@@ -250,21 +250,24 @@ const Easy = () => {
                 <div className="p-5 pt-2">
                   <h3 className="font-display font-semibold text-foreground text-lg mb-1">{cat.title}</h3>
                   <p className="text-sm text-muted-foreground mb-3">{cat.about}</p>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {cat.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                        {tag}
-                      </span>
-                    ))}
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={cat.invite}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-1.5 rounded-lg bg-noxx-red text-foreground text-sm font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20"
+                    >
+                      Invite Bot
+                    </a>
+                    <a
+                      href={cat.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
+                    >
+                      Website <ExternalLink className="w-3 h-3" />
+                    </a>
                   </div>
-                  <a
-                    href={cat.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-noxx-red hover:underline inline-flex items-center gap-1"
-                  >
-                    Visit Website <ExternalLink className="w-3 h-3" />
-                  </a>
                 </div>
               </div>
             ))}
