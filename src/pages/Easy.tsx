@@ -23,7 +23,7 @@ const testimonials = [
   { quote: "The best forum for resource ever. I build my FiveM and Minecraft servers with this forum!", name: "quix" },
   { quote: "Joined last week and already have a Minecraft server in construction. It's wild!", name: "kedoo" },
   { quote: "I will be forever grateful. This is where I learned to create servers..", name: "antiexe" },
-  { quote: "Easy-Code provides a fantastic platform for showing off my builds and art. Highly recommend to any developer.", name: "kseny" },
+  { quote: "Kaos Dev. provides a fantastic platform for showing off my builds and art. Highly recommend to any developer.", name: "kseny" },
 ];
 
 const categories = [
@@ -83,20 +83,20 @@ const Easy = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <AnimatedSection>
             <h2 className="text-3xl font-display font-bold text-center text-foreground mb-2">
-              About <span className="text-noxx-red">Easy-Code</span>
+              About <span className="text-noxx-red">Kaos Dev.</span>
             </h2>
             <div className="w-16 h-1 bg-noxx-red mx-auto rounded mb-8" />
           </AnimatedSection>
           <AnimatedSection direction="left" delay={0.1}>
             <div className="glass-card p-6 mb-6">
               <p className="text-muted-foreground">
-                Easy-Code is a thriving <span className="text-noxx-red font-semibold">resources forum</span> of developers, gamers and passionates. We have all kind of resources, leaks and fun stuff.
+                Kaos Dev. is a thriving <span className="text-noxx-red font-semibold">resources forum</span> of developers, gamers and passionates. We have all kind of resources, leaks and fun stuff.
               </p>
             </div>
           </AnimatedSection>
           <AnimatedSection direction="right" delay={0.15}>
             <p className="text-muted-foreground text-center">
-              We unite people across the digital landscape, sharing epic moments, make new <span className="text-noxx-red font-semibold">dreams</span> and fostering a friendly and welcoming environment for all skill levels. Join Easy-Code to access quality resources in game dev, web dev, scripting, design and more. Connect with other creators and level up your project.
+              We unite people across the digital landscape, sharing epic moments, make new <span className="text-noxx-red font-semibold">dreams</span> and fostering a friendly and welcoming environment for all skill levels. Join Kaos Dev. to access quality resources in game dev, web dev, scripting, design and more. Connect with other creators and level up your project.
             </p>
           </AnimatedSection>
         </div>
@@ -108,7 +108,7 @@ const Easy = () => {
           <h2 className="text-3xl font-display font-bold text-center text-foreground mb-2">Server Lock & Maintenance Schedule</h2>
           <div className="w-16 h-1 bg-noxx-red mx-auto rounded mb-6" />
           <p className="text-center text-muted-foreground mb-8">
-            Easy-Code occasionally implements planned server locks for staff breaks, holidays (Easter, Christmas), or major technical maintenance.
+            Kaos Dev. occasionally implements planned server locks for staff breaks, holidays (Easter, Christmas), or major technical maintenance.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {maintenanceSchedule.map((item) => (
@@ -197,9 +197,9 @@ const Easy = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-display font-bold text-foreground mb-4">Forge Your Code!</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mb-8">Don't just observe the adventure, live it. Become a part of the Easy-Code community today and dive into the grand, collaborative experience!</p>
+          <p className="text-muted-foreground max-w-xl mx-auto mb-8">Don't just observe the adventure, live it. Become a part of the Kaos Dev. community today and dive into the grand, collaborative experience!</p>
           <a href="https://easy-code.ro/discord" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-noxx-red text-foreground font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20">
-            Join Easy-Code <ExternalLink className="w-4 h-4" />
+            Join Kaos Dev. <ExternalLink className="w-4 h-4" />
           </a>
         </div>
       </section>
