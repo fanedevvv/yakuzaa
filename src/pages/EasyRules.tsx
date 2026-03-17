@@ -117,8 +117,8 @@ const EasyRules = () => {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link to="/easy" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">
-              ← Back to Easy-Code
+            <Link to="/kaos" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">
+              ← Back to Kaos Dev.
             </Link>
             <a href="https://easy-code.ro/discord" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-noxx-red text-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20">
               Join Discord

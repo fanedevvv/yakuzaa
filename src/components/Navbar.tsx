@@ -179,7 +179,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 font-display font-bold text-xl text-foreground">
           <img src={YakuzaLogo} alt="Yakuza" className="w-7 h-7 rounded-full" />
-          Yakuza Dev.
+          Yakuza Bot
         </Link>
 
         {/* Desktop nav */}

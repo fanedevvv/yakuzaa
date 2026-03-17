@@ -68,7 +68,7 @@ const Easy = () => {
             A <strong className="text-foreground">thriving resources forum</strong> for all your wildest dreams.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="flex flex-wrap justify-center gap-3">
-            <Link to="/easy/rules" className="px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">
+            <Link to="/kaos/rules" className="px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">
               View Rules
             </Link>
             <a href="https://easy-code.ro/discord" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-xl bg-noxx-red text-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20 flex items-center gap-2">
