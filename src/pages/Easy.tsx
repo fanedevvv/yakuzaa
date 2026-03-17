@@ -83,7 +83,7 @@ const Easy = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <AnimatedSection>
             <h2 className="text-3xl font-display font-bold text-center text-foreground mb-2">
-              About <span className="text-noxx-red">Easy-Code</span>
+              About <span className="text-noxx-red">Kaos Dev.</span>
             </h2>
             <div className="w-16 h-1 bg-noxx-red mx-auto rounded mb-8" />
           </AnimatedSection>
