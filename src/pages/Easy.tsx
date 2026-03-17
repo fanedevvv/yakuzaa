@@ -90,7 +90,7 @@ const Easy = () => {
           <AnimatedSection direction="left" delay={0.1}>
             <div className="glass-card p-6 mb-6">
               <p className="text-muted-foreground">
-                Easy-Code is a thriving <span className="text-noxx-red font-semibold">resources forum</span> of developers, gamers and passionates. We have all kind of resources, leaks and fun stuff.
+                Kaos Dev. is a thriving <span className="text-noxx-red font-semibold">resources forum</span> of developers, gamers and passionates. We have all kind of resources, leaks and fun stuff.
               </p>
             </div>
           </AnimatedSection>
