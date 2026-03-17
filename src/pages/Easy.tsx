@@ -65,10 +65,20 @@ const testimonials = [
 const categories = [
   {
     title: "Yakuza",
-    desc: "Another multifunctional Discord bot.",
+    about: "Just another multifunctional bot.",
     link: "https://yakuza.my/",
+    avatar: "https://cdn.discordapp.com/avatars/1448429544112656588/88dc0b2a67b7e887842f1c23c0ffc897.png?size=128",
+    banner: "https://cdn.discordapp.com/banners/1448429544112656588/117e83ea5e163b2a26b1539c6ed10de5.png?size=480",
+    tags: ["automod", "fun", "moderation", "multipurpose", "music"],
   },
-  { title: "Roco", desc: "A good Discord music bot.", link: "https://rocobot.xyz/" },
+  {
+    title: "Roco",
+    about: "A music Discord bot.",
+    link: "https://rocobot.xyz/",
+    avatar: "https://cdn.discordapp.com/avatars/960624234688811188/6c297dc2ccd81cf05359b10d102855fe.png?size=128",
+    banner: "https://cdn.discordapp.com/banners/960624234688811188/fc6eecd9c9ad4a8cd6e41d4b98b52242.png?size=480",
+    tags: ["music", "soundcloud", "spotify", "superfast"],
+  },
 ];
 
 const Easy = () => {
