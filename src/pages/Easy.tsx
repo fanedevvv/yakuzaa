@@ -108,7 +108,7 @@ const Easy = () => {
           <h2 className="text-3xl font-display font-bold text-center text-foreground mb-2">Server Lock & Maintenance Schedule</h2>
           <div className="w-16 h-1 bg-noxx-red mx-auto rounded mb-6" />
           <p className="text-center text-muted-foreground mb-8">
-            Easy-Code occasionally implements planned server locks for staff breaks, holidays (Easter, Christmas), or major technical maintenance.
+            Kaos Dev. occasionally implements planned server locks for staff breaks, holidays (Easter, Christmas), or major technical maintenance.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {maintenanceSchedule.map((item) => (
