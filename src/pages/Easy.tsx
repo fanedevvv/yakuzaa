@@ -47,48 +47,28 @@ const offers = [
   },
   {
     icon: Code,
-    title: "Custom Resources",
-    desc: "Unique resources for your wildest projects. You can access all with only an account. You don't need to pay anything.",
+    title: "Support",
+    desc: "We offer support for both bots, Yakuza and Roco, 24/7 support.",
   },
 ];
 
 const testimonials = [
-  { quote: "The best forum for resource ever. I build my FiveM and Minecraft servers with this forum!", name: "quix" },
-  { quote: "Joined last week and already have a Minecraft server in construction. It's wild!", name: "kedoo" },
-  { quote: "I will be forever grateful. This is where I learned to create servers..", name: "antiexe" },
+  { quote: "Yakuza is the best multipurpose Discord bot I ever seen", name: "quix" },
+  { quote: "I added Yakuza and Roco on my Community and it's really helpful", name: "kedoo" },
+  { quote: "Roco is a work of art, and Yakuza is a beast.", name: "antiexe" },
   {
-    quote:
-      "Kaos Dev. provides a fantastic platform for showing off my builds and art. Highly recommend to any developer.",
+    quote: "Kaos Dev. is really helpful with support and a good chat.",
     name: "kseny",
   },
 ];
 
 const categories = [
   {
-    title: "Game Dev",
-    desc: "SA:MP, FiveM, RedM, Rage:MP, MTA:SA, CS2, Rust, Metin2 and Minecraft.",
-    link: "https://easy-code.ro/",
+    title: "Yakuza",
+    desc: "Another multifunctional Discord bot.",
+    link: "https://yakuza.my/",
   },
-  { title: "Web Dev", desc: "Invision Community, Xenforo, WordPress and others.", link: "https://easy-code.ro/" },
-  { title: "Leaks", desc: "Cracking, Source Codes, Tools, Python, NodeJS and others.", link: "https://easy-code.ro/" },
-];
-
-const maintenanceSchedule = [
-  {
-    title: "Christmas Holiday Break",
-    period: "Dec 24th - Jan 1st",
-    desc: "Annual holiday for staff to rest and recharge.",
-  },
-  {
-    title: "Easter Event Lock",
-    period: "Varies (Friday - Monday)",
-    desc: "Short staff holiday closure and event setup for the Easter weekend.",
-  },
-  {
-    title: "Halloween Holiday Break",
-    period: "October 31st (Day Lock)",
-    desc: "Server lock for the day to give staff a break on trick or treating etc.",
-  },
+  { title: "Roco", desc: "A good Discord music bot.", link: "https://rocobot.xyz/" },
 ];
 
 const Easy = () => {
@@ -179,32 +159,6 @@ const Easy = () => {
         </div>
       </section>
 
-      {/* Maintenance Schedule */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-display font-bold text-center text-foreground mb-2">
-            Server Lock & Maintenance Schedule
-          </h2>
-          <div className="w-16 h-1 bg-noxx-red mx-auto rounded mb-6" />
-          <p className="text-center text-muted-foreground mb-8">
-            Kaos Dev. occasionally implements planned server locks for staff breaks, holidays (Easter, Christmas), or
-            major technical maintenance.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            {maintenanceSchedule.map((item) => (
-              <div key={item.title} className="glass-card p-5 text-center">
-                <h3 className="font-display font-semibold text-noxx-red mb-1">{item.title}</h3>
-                <p className="text-xs text-muted-foreground mb-2">Lock Period: {item.period}</p>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-sm text-muted-foreground italic">
-            Always Check: Specific dates for seasonal locks are announced in the #announcements channel on Discord.
-          </p>
-        </div>
-      </section>
-
       {/* What We Offer */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -264,7 +218,7 @@ const Easy = () => {
       {/* Categories */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">Explore Our Category</h2>
+          <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">Explore Our Bots</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {categories.map((cat) => (
               <div key={cat.title} className="glass-card-hover p-5">
@@ -287,13 +241,12 @@ const Easy = () => {
       {/* CTA */}
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-display font-bold text-foreground mb-4">Forge Your Code!</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-4">Forge Your Community!</h2>
           <p className="text-muted-foreground max-w-xl mx-auto mb-8">
-            Don't just observe the adventure, live it. Become a part of the Kaos Dev. community today and dive into the
-            grand, collaborative experience!
+            Make a great Community with this two bots, anything else is pointless.
           </p>
           <a
-            href="https://easy-code.ro/discord"
+            href="https://discord.gg/MR9PSKdJpT"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-noxx-red text-foreground font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20"
