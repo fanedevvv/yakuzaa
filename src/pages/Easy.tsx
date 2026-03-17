@@ -23,7 +23,7 @@ const testimonials = [
   { quote: "The best forum for resource ever. I build my FiveM and Minecraft servers with this forum!", name: "quix" },
   { quote: "Joined last week and already have a Minecraft server in construction. It's wild!", name: "kedoo" },
   { quote: "I will be forever grateful. This is where I learned to create servers..", name: "antiexe" },
-  { quote: "Easy-Code provides a fantastic platform for showing off my builds and art. Highly recommend to any developer.", name: "kseny" },
+  { quote: "Kaos Dev. provides a fantastic platform for showing off my builds and art. Highly recommend to any developer.", name: "kseny" },
 ];
 
 const categories = [
