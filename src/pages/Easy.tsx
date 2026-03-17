@@ -245,7 +245,7 @@ const Easy = () => {
                   />
                 </div>
                 {/* Content */}
-                <div className="p-5 pt-10">
+                <div className="p-5 pt-2">
                   <h3 className="font-display font-semibold text-foreground text-lg mb-1">{cat.title}</h3>
                   <p className="text-sm text-muted-foreground mb-3">{cat.about}</p>
                   <div className="flex flex-wrap gap-1.5 mb-4">
