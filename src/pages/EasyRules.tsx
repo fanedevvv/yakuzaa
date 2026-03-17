@@ -61,7 +61,7 @@ const EasyRules = () => {
             Community Rules
           </motion.h1>
           <p className="text-center text-muted-foreground max-w-xl mx-auto mb-12">
-            Please read and follow these rules to ensure a positive experience for everyone in the Easy-Code community.
+            Please read and follow these rules to ensure a positive experience for everyone in the Kaos Dev. community.
           </p>
 
           {/* Rules */}
