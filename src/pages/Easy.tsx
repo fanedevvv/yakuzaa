@@ -231,18 +231,18 @@ const Easy = () => {
           <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">Explore Our Bots</h2>
           <div className="flex flex-col md:flex-row justify-center gap-6">
             {categories.map((cat) => (
-              <div key={cat.title} className="glass-card-hover overflow-hidden w-full md:w-80">
+              <div key={cat.title} className="glass-card-hover overflow-visible w-full md:w-80">
                 {/* Banner */}
-                <div className="relative h-28 overflow-hidden">
+                <div className="relative h-28 rounded-t-lg overflow-hidden">
                   <img src={cat.banner} alt={`${cat.title} banner`} className="w-full h-full object-cover" />
-                  {/* Avatar overlapping banner */}
-                  <div className="absolute -bottom-8 left-4">
-                    <img
-                      src={cat.avatar}
-                      alt={`${cat.title} avatar`}
-                      className="w-16 h-16 rounded-full border-4 border-background"
-                    />
-                  </div>
+                </div>
+                {/* Avatar */}
+                <div className="relative px-4">
+                  <img
+                    src={cat.avatar}
+                    alt={`${cat.title} avatar`}
+                    className="w-16 h-16 rounded-full border-4 border-background -mt-8 relative z-10"
+                  />
                 </div>
                 {/* Content */}
                 <div className="p-5 pt-10">
