@@ -45,8 +45,8 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/docs" element={<Docs />} />
           <Route path="/fane" element={<Fane />} />
-          <Route path="/easy" element={<Easy />} />
-          <Route path="/easy/rules" element={<EasyRules />} />
+          <Route path="/kaos" element={<Easy />} />
+          <Route path="/kaos/rules" element={<EasyRules />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/admin" element={<Admin />} />

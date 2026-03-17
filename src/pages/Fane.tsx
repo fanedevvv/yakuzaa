@@ -48,7 +48,7 @@ const toolbox = [
 const projects = [
   { name: "Yakuza", desc: "A powerful, multi-purpose Discord bot focused on moderation, utility, and community-building.", tags: ["Node.js", "Discord.js", "MongoDB", "API Integration"], link: "https://discord.com/oauth2/authorize?client_id=1448429544112656588&permissions=8&integration_type=0&scope=bot+applications.commands" },
   { name: "Yakuza Dashboard", desc: "A modern web dashboard for managing Yakuza bot settings, commands, and server configurations.", tags: ["React", "Tailwind CSS", "Supabase", "TypeScript"], link: "https://dashboard.yakuza.my/" },
-  { name: "Easy-Code Romania", desc: "One of the best sources forum in the market.", tags: ["Community", "Sources", "#1"], link: "/easy" },
+  { name: "Kaos Dev.", desc: "One of the best sources forum in the market.", tags: ["Community", "Sources", "#1"], link: "/kaos" },
 ];
 
 const Fane = () => {

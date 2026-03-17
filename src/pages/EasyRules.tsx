@@ -34,8 +34,8 @@ const EasyRules = () => {
     <Layout>
       <section className="py-6">
         <div className="container mx-auto px-4">
-          <Link to="/easy" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
-            <ArrowLeft className="w-4 h-4" /> Back to Easy-Code
+          <Link to="/kaos" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
+            <ArrowLeft className="w-4 h-4" /> Back to Kaos Dev.
           </Link>
         </div>
       </section>
@@ -61,7 +61,7 @@ const EasyRules = () => {
             Community Rules
           </motion.h1>
           <p className="text-center text-muted-foreground max-w-xl mx-auto mb-12">
-            Please read and follow these rules to ensure a positive experience for everyone in the Easy-Code community.
+            Please read and follow these rules to ensure a positive experience for everyone in the Kaos Dev. community.
           </p>
 
           {/* Rules */}
@@ -117,8 +117,8 @@ const EasyRules = () => {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <Link to="/easy" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">
-              ← Back to Easy-Code
+            <Link to="/kaos" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">
+              ← Back to Kaos Dev.
             </Link>
             <a href="https://easy-code.ro/discord" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-noxx-red text-foreground font-semibold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-noxx-red/20">
               Join Discord

@@ -47,7 +47,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-semibold text-foreground mb-3">Contact</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/easy" className="hover:text-foreground transition-colors">• Easy-Code</Link></li>
+              <li><Link to="/kaos" className="hover:text-foreground transition-colors">• Kaos Dev.</Link></li>
               <li><Link to="/fane" className="hover:text-foreground transition-colors">• fane_dev</Link></li>
             </ul>
           </div>
