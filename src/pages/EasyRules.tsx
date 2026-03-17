@@ -34,8 +34,8 @@ const EasyRules = () => {
     <Layout>
       <section className="py-6">
         <div className="container mx-auto px-4">
-          <Link to="/easy" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
-            <ArrowLeft className="w-4 h-4" /> Back to Easy-Code
+          <Link to="/kaos" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
+            <ArrowLeft className="w-4 h-4" /> Back to Kaos Dev.
           </Link>
         </div>
       </section>
