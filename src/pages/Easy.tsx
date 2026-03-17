@@ -229,19 +229,41 @@ const Easy = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <h2 className="text-3xl font-display font-bold text-center text-foreground mb-8">Explore Our Bots</h2>
-          <div className="flex flex-col md:flex-row justify-center gap-4">
+          <div className="flex flex-col md:flex-row justify-center gap-6">
             {categories.map((cat) => (
-              <div key={cat.title} className="glass-card-hover p-5">
-                <h3 className="font-display font-semibold text-foreground mb-2">{cat.title}</h3>
-                <p className="text-sm text-muted-foreground mb-3">{cat.desc}</p>
-                <a
-                  href={cat.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-noxx-red hover:underline"
-                >
-                  View Channel →
-                </a>
+              <div key={cat.title} className="glass-card-hover overflow-hidden w-full md:w-80">
+                {/* Banner */}
+                <div className="relative h-28 overflow-hidden">
+                  <img src={cat.banner} alt={`${cat.title} banner`} className="w-full h-full object-cover" />
+                  {/* Avatar overlapping banner */}
+                  <div className="absolute -bottom-8 left-4">
+                    <img
+                      src={cat.avatar}
+                      alt={`${cat.title} avatar`}
+                      className="w-16 h-16 rounded-full border-4 border-background"
+                    />
+                  </div>
+                </div>
+                {/* Content */}
+                <div className="p-5 pt-10">
+                  <h3 className="font-display font-semibold text-foreground text-lg mb-1">{cat.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-3">{cat.about}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {cat.tags.map((tag) => (
+                      <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href={cat.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-noxx-red hover:underline inline-flex items-center gap-1"
+                  >
+                    Visit Website <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
               </div>
             ))}
           </div>
