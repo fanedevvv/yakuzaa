@@ -44,7 +44,7 @@ const navMenus: NavCategory[] = [
     label: "Community",
     items: [
       { label: "FanE", path: "/fane", icon: Crown },
-      { label: "Easy-Code", path: "/easy", icon: Code },
+      { label: "Kaos Dev.", path: "/kaos", icon: Code },
       { label: "Partners", path: "/partners", icon: Users },
       { label: "Meet the Staff", path: "/devs", icon: Users },
       { label: "News", path: "/news", icon: Sparkles },
