@@ -100,6 +100,13 @@ const Easy = () => {
       {/* Hero */}
       <section className="py-12 text-center">
         <div className="container mx-auto px-4">
+          <motion.img
+            src={kaosLogo}
+            alt="Kaos Dev. Logo"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-32 md:w-40 mx-auto mb-4"
+          />
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
