@@ -16,6 +16,7 @@ import {
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
+import kaosLogo from "@/assets/kaos-logo.png";
 
 const metrics = [
   { value: "4000+", label: "Total Members" },
