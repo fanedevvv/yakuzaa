@@ -7,7 +7,8 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8080,
+    port: 3009,
+    allowedHosts: ["yakuza.my", "www.yakuza.my"], // <-- ADAUGĂ EXACT ACEASTĂ LINIE
     hmr: {
       overlay: false,
     },

@@ -22,8 +22,11 @@ const routeTitles: Record<string, string> = {
   "/admin": "Yakuza | Admin",
 };
 
-const OG_IMAGE = "https://yakuzaa.lovable.app/og-image.png";
 const SITE_DESC = "A powerful Discord bot that brings advanced features and seamless automation to your server.";
+
+const getSiteUrl = (pathname: string) => `${window.location.origin}${pathname}`;
+
+const getOgImageUrl = () => `${window.location.origin}/og-image.png`;
 
 const updateMeta = (property: string, content: string) => {
   const selectors = [
@@ -48,19 +51,36 @@ const updateMeta = (property: string, content: string) => {
   document.head.appendChild(meta);
 };
 
+const updateCanonical = (href: string) => {
+  let link = document.querySelector('link[rel="canonical"]');
+
+  if (!link) {
+    link = document.createElement("link");
+    link.setAttribute("rel", "canonical");
+    document.head.appendChild(link);
+  }
+
+  link.setAttribute("href", href);
+};
+
 const PageMeta = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
     const title = routeTitles[pathname] || "Yakuza Bot";
+    const pageUrl = getSiteUrl(pathname);
+    const ogImageUrl = getOgImageUrl();
+
     document.title = title;
 
     updateMeta("og:title", title);
     updateMeta("twitter:title", title);
     updateMeta("og:description", SITE_DESC);
     updateMeta("twitter:description", SITE_DESC);
-    updateMeta("og:image", OG_IMAGE);
-    updateMeta("twitter:image", OG_IMAGE);
+    updateMeta("og:image", ogImageUrl);
+    updateMeta("twitter:image", ogImageUrl);
+    updateMeta("og:url", pageUrl);
+    updateCanonical(pageUrl);
   }, [pathname]);
 
   return null;
