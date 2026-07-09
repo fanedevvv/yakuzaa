@@ -32,8 +32,11 @@ cd <YOUR_PROJECT_NAME>
 # Step 3: Install the necessary dependencies.
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Start the development server. It stays running after you close the terminal.
 npm run dev
+
+# Optional: use the foreground server if you want the terminal to stay attached.
+npm run dev:foreground
 ```
 
 **Edit a file directly in GitHub**

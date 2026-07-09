@@ -4,6 +4,7 @@ import { Search, ChevronDown, Crown, Shield, Coins, Gavel, Music, Gamepad2, Wren
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
 import { useDiscordBotCommands, BotCommand } from "@/hooks/useDiscordBotCommands";
+import { useDiscordBotStats } from "@/hooks/useDiscordBotStats";
 
 // Map parentName to category info
 const categoryMeta: Record<string, { icon: any; title: string; desc: string; color: string }> = {
@@ -135,6 +136,7 @@ function groupCommands(commands: BotCommand[]): GroupedCategory[] {
 
 const Commands = () => {
   const { data, isLoading, refetch } = useDiscordBotCommands();
+  const { data: botStats } = useDiscordBotStats();
   const [search, setSearch] = useState("");
   const [openCategory, setOpenCategory] = useState<string | null>(null);
 
@@ -160,6 +162,8 @@ const Commands = () => {
   }, [categories, search]);
 
   const totalCommands = data?.totalFlattened ?? 0;
+  const totalRawCommands = data?.totalRaw ?? 0;
+  const botName = botStats?.bot?.username ?? "Yakuza";
 
   return (
     <Layout>
@@ -173,10 +177,12 @@ const Commands = () => {
               Commands
             </h1>
             <p className="text-center text-muted-foreground mb-1 text-sm">
-              {isLoading ? "Loading..." : `${totalCommands} commands across ${categories.length} categories`}
+              {isLoading
+                ? "Loading..."
+                : `${totalCommands} slash entries from ${totalRawCommands} root commands, grouped in ${categories.length} categories`}
             </p>
             <p className="text-center text-muted-foreground mb-2 text-xs">
-              Synced live from Discord API • All slash commands (/)
+              Live from Discord API • Bot: {botName}
             </p>
           </AnimatedSection>
 

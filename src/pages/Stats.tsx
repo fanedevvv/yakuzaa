@@ -1,85 +1,42 @@
 import { motion } from "framer-motion";
-import { Clock, Users, Server, MessageSquare, Layers, RefreshCw, Activity, TrendingUp } from "lucide-react";
+import { Bot, Users, Server, Layers, RefreshCw, Command } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import AnimatedSection from "@/components/AnimatedSection";
-import { AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { useDiscordBotStats } from "@/hooks/useDiscordBotStats";
+import { useDiscordBotCommands } from "@/hooks/useDiscordBotCommands";
+
+const formatResetAfter = (ms: number) => {
+  const seconds = Math.max(0, Math.floor(ms / 1000));
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
+  if (minutes === 0) return `${remainingSeconds}s`;
+  return `${minutes}m ${remainingSeconds}s`;
+};
 
 const Stats = () => {
-  const { data: botStats, isLoading, refetch } = useDiscordBotStats();
-  const [uptime, setUptime] = useState({ days: 0, hours: 1, minutes: 0, seconds: 4 });
+  const { data: botStats, isLoading, refetch, dataUpdatedAt } = useDiscordBotStats();
+  const { data: botCommands } = useDiscordBotCommands();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setUptime((prev) => {
-        let { days, hours, minutes, seconds } = prev;
-        seconds++;
-        if (seconds >= 60) { seconds = 0; minutes++; }
-        if (minutes >= 60) { minutes = 0; hours++; }
-        if (hours >= 24) { hours = 0; days++; }
-        return { days, hours, minutes, seconds };
-      });
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const pad = (n: number) => String(n).padStart(2, "0");
-
-  const serverCount = botStats?.servers ?? 0;
-  const totalMembers = botStats?.totalMembers ?? 0;
-  const shardCount = botStats?.shards ?? 1;
-  const sessionsRemaining = botStats?.sessionStartLimit?.remaining ?? 0;
-  const sessionsTotal = botStats?.sessionStartLimit?.total ?? 0;
+  const botAvatarUrl = botStats?.bot?.avatar
+    ? `https://cdn.discordapp.com/avatars/${botStats.bot.id}/${botStats.bot.avatar}.png?size=256`
+    : null;
 
   const statCards = [
-    { icon: Users, value: `${totalMembers}+`, label: "Total Users", desc: "Users across all servers", color: "text-noxx-red" },
-    { icon: Server, value: `${serverCount}`, label: "Active Servers", desc: "Discord servers using Yakuza", color: "text-noxx-red" },
-    { icon: Layers, value: `${shardCount}`, label: "Shards", desc: "Active bot instances", color: "text-noxx-red" },
-    { icon: MessageSquare, value: `${sessionsRemaining}/${sessionsTotal}`, label: "Gateway Sessions", desc: "Remaining session starts", color: "text-noxx-red" },
+    { icon: Users, value: botStats?.totalMembers?.toLocaleString() ?? "...", label: "Total Members" },
+    { icon: Server, value: botStats?.servers?.toLocaleString() ?? "...", label: "Servers" },
+    { icon: Layers, value: botStats?.shards?.toLocaleString() ?? "...", label: "Shards" },
+    { icon: Command, value: botCommands?.totalFlattened?.toLocaleString() ?? "...", label: "Slash Commands" },
   ];
 
-  const historicalStats = [
-    { label: "Server Count", value: `${serverCount}`, sub: "live", icon: Server },
-    { label: "Total Members", value: `${totalMembers}`, sub: "live", icon: Users },
-    { label: "Shards", value: `${shardCount}`, sub: "Active", icon: Activity, subColor: "text-noxx-green" },
-    { label: "Uptime", value: "99.9%", sub: "This month", icon: Clock },
-  ];
-
-  const services = ["Discord Gateway", "Music Playback", "Database", "Cache Layer", "API Endpoints", "WebSocket Server"];
-
-  const vpsInfo = [
-    { label: "Provider", value: "Five-Host" },
-    { label: "Location", value: "Germany, EU" },
-    { label: "OS", value: "Ubuntu 22.04 LTS" },
-    { label: "CPU", value: "16 vCPU Cores" },
-    { label: "RAM", value: "32 GB" },
-    { label: "Storage", value: "800 GB NVMe" },
-    { label: "DDoS Protection", value: "Disabled" },
-  ];
-
-  const sysInfo = [
-    { label: "Bot Username", value: botStats?.bot?.username ? `@${botStats.bot.username}` : "Loading..." },
-    { label: "Bot ID", value: botStats?.bot?.id ?? "Loading..." },
-    { label: "Discriminator", value: botStats?.bot?.discriminator ?? "Loading..." },
-    { label: "Node.js", value: "v20.18.1" },
-    { label: "Discord.js", value: "v14.16.3" },
-    { label: "Gateway Sessions", value: `${sessionsRemaining} / ${sessionsTotal} remaining` },
-  ];
-
-  const perfCards = [
-    { label: "Website Ping", value: "15ms", change: "-62%", color: "text-noxx-green" },
-    { label: "API Latency", value: "29ms", change: "~", color: "text-muted-foreground" },
-    { label: "Bot Ping", value: "23ms", change: "-52%", color: "text-noxx-green" },
-    { label: "WebSocket", value: "Connected", change: "", color: "text-noxx-green" },
-  ];
+  const guildsSorted = [...(botStats?.guilds ?? [])].sort((a, b) => b.memberCount - a.memberCount);
+  const sessionLimit = botStats?.sessionStartLimit;
 
   return (
     <Layout>
       <section className="py-12">
         <div className="container mx-auto px-4">
-          {/* Header */}
           <div className="flex items-center justify-center gap-4 mb-4">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-noxx-red/30 bg-noxx-red/10 text-sm text-noxx-red font-medium">
               <span className="w-2 h-2 rounded-full bg-noxx-red animate-pulse" />
@@ -95,287 +52,75 @@ const Stats = () => {
           </div>
 
           <AnimatedSection>
-            <h1 className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-2" style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}>
-              Bot Statistics
+            <h1
+              className="text-4xl md:text-5xl font-display font-bold text-center text-noxx-red mb-2"
+              style={{ textShadow: "0 0 40px hsl(0 80% 45% / 0.3)" }}
+            >
+              Bot Information
             </h1>
             <p className="text-center text-muted-foreground max-w-xl mx-auto mb-2">
-              Real-time performance metrics and system information for Yakuza
+              Real bot profile and operational metrics from Discord API.
             </p>
             <p className="text-center text-xs text-muted-foreground mb-8">
-              Last updated: {new Date().toLocaleTimeString()}
+              Last sync: {dataUpdatedAt ? new Date(dataUpdatedAt).toLocaleString() : "Waiting for first sync..."}
             </p>
           </AnimatedSection>
 
-          {/* Uptime Banner */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl mx-auto mb-6 glass-card p-6 flex flex-col md:flex-row items-center justify-between gap-4"
+            className="max-w-4xl mx-auto mb-8 glass-card p-6"
           >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-noxx-red/10 flex items-center justify-center">
-                <Clock className="w-6 h-6 text-noxx-red" />
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
+              <div className="w-16 h-16 rounded-full bg-muted overflow-hidden flex items-center justify-center">
+                {botAvatarUrl ? (
+                  <img src={botAvatarUrl} alt={botStats?.bot?.username ?? "Bot avatar"} className="w-full h-full object-cover" />
+                ) : (
+                  <Bot className="w-8 h-8 text-muted-foreground" />
+                )}
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Current Uptime</p>
-                <p className="text-2xl font-mono font-bold text-foreground">
-                  {uptime.days}d {pad(uptime.hours)}h {pad(uptime.minutes)}m {pad(uptime.seconds)}s
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-8">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-noxx-red">99.9%</p>
-                <p className="text-xs text-muted-foreground">Monthly Uptime</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-foreground">0</p>
-                <p className="text-xs text-muted-foreground">Incidents (30d)</p>
+
+              <div className="flex-1">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Discord Bot</p>
+                <h2 className="text-xl font-bold text-foreground">
+                  {botStats?.bot?.username ?? "Loading..."}
+                  {botStats?.bot?.discriminator && botStats.bot.discriminator !== "0" ? `#${botStats.bot.discriminator}` : ""}
+                </h2>
+                <p className="text-sm text-muted-foreground font-mono">ID: {botStats?.bot?.id ?? "..."}</p>
               </div>
             </div>
           </motion.div>
 
-          {/* Stat Cards */}
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             {statCards.map((stat, i) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.08 }}
                 className="glass-card p-5"
               >
                 <div className="w-10 h-10 rounded-xl bg-noxx-red/10 flex items-center justify-center mb-3">
                   <stat.icon className="w-5 h-5 text-noxx-red" />
                 </div>
-                <p className="text-3xl font-bold text-foreground">{isLoading ? "..." : stat.value}</p>
+                <p className="text-3xl font-bold text-foreground">{stat.value}</p>
                 <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
-                <p className="text-xs text-muted-foreground/70 mt-1">{stat.desc}</p>
               </motion.div>
             ))}
           </div>
 
-          {/* Guilds List */}
-          {botStats?.guilds && botStats.guilds.length > 0 && (
-            <div className="max-w-4xl mx-auto mb-10">
-              <h2 className="text-xl font-bold text-foreground mb-4">Servers ({botStats.guilds.length})</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {botStats.guilds.map((guild) => (
-                  <div key={guild.id} className="glass-card p-4 flex items-center gap-4">
-                    {guild.icon ? (
-                      <img
-                        src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${guild.icon.startsWith('a_') ? 'gif' : 'png'}?size=64`}
-                        alt={guild.name}
-                        className="w-10 h-10 rounded-full"
-                      />
-                    ) : (
-                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-sm font-bold text-muted-foreground">
-                        {guild.name.charAt(0)}
-                      </div>
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-foreground truncate">{guild.name}</p>
-                      <p className="text-xs text-muted-foreground">{guild.memberCount} members</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Historical Data */}
           <div className="max-w-4xl mx-auto mb-10">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                <TrendingUp className="w-4 h-4 text-purple-400" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-foreground">Historical Data</h2>
-                <p className="text-xs text-muted-foreground">Live data from Discord API</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              {historicalStats.map((s) => (
-                <div key={s.label} className="glass-card p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm text-muted-foreground">{s.label}</p>
-                    <s.icon className="w-4 h-4 text-muted-foreground" />
-                  </div>
-                  <p className="text-2xl font-bold text-foreground">{isLoading ? "..." : s.value}</p>
-                  <p className={`text-xs ${s.subColor || "text-muted-foreground"}`}>{s.sub}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Charts */}
-            <div className="grid md:grid-cols-2 gap-4 mb-6">
-              <div className="glass-card p-5">
-                <h3 className="text-sm font-semibold text-foreground mb-4">Server Growth</h3>
-                <div className="h-40">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={[
-                      { month: "Oct", servers: 2 }, { month: "Nov", servers: 3 }, { month: "Dec", servers: 4 },
-                      { month: "Jan", servers: 5 }, { month: "Feb", servers: 6 }, { month: "Mar", servers: serverCount },
-                    ]}>
-                      <defs>
-                        <linearGradient id="serverGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="hsl(0, 80%, 45%)" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="hsl(0, 80%, 45%)" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 20%)" />
-                      <XAxis dataKey="month" tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
-                      <YAxis tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
-                      <Tooltip contentStyle={{ background: 'hsl(0, 0%, 10%)', border: '1px solid hsl(0, 0%, 20%)', borderRadius: 8, color: '#fff' }} />
-                      <Area type="monotone" dataKey="servers" stroke="hsl(0, 80%, 45%)" fill="url(#serverGrad)" strokeWidth={2} />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-
-              <div className="glass-card p-5">
-                <h3 className="text-sm font-semibold text-foreground mb-4">User Growth</h3>
-                <div className="h-40">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={[
-                      { month: "Oct", users: 120 }, { month: "Nov", users: 280 }, { month: "Dec", users: 410 },
-                      { month: "Jan", users: 550 }, { month: "Feb", users: 720 }, { month: "Mar", users: totalMembers || 874 },
-                    ]}>
-                      <defs>
-                        <linearGradient id="userGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="hsl(270, 60%, 55%)" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="hsl(270, 60%, 55%)" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 20%)" />
-                      <XAxis dataKey="month" tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
-                      <YAxis tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
-                      <Tooltip contentStyle={{ background: 'hsl(0, 0%, 10%)', border: '1px solid hsl(0, 0%, 20%)', borderRadius: 8, color: '#fff' }} />
-                      <Area type="monotone" dataKey="users" stroke="hsl(270, 60%, 55%)" fill="url(#userGrad)" strokeWidth={2} />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-
-              <div className="glass-card p-5">
-                <h3 className="text-sm font-semibold text-foreground mb-4">API Latency (24h)</h3>
-                <div className="h-40">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={[
-                      { time: "00:00", latency: 42 }, { time: "04:00", latency: 38 }, { time: "08:00", latency: 55 },
-                      { time: "12:00", latency: 48 }, { time: "16:00", latency: 62 }, { time: "20:00", latency: 45 }, { time: "Now", latency: 29 },
-                    ]}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(0, 0%, 20%)" />
-                      <XAxis dataKey="time" tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} />
-                      <YAxis tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} axisLine={false} tickLine={false} unit="ms" />
-                      <Tooltip contentStyle={{ background: 'hsl(0, 0%, 10%)', border: '1px solid hsl(0, 0%, 20%)', borderRadius: 8, color: '#fff' }} />
-                      <Line type="monotone" dataKey="latency" stroke="hsl(142, 70%, 45%)" strokeWidth={2} dot={{ fill: 'hsl(142, 70%, 45%)', r: 3 }} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-
-              <div className="glass-card p-5">
-                <h3 className="text-sm font-semibold text-foreground mb-4">Uptime Distribution</h3>
-                <div className="h-40 flex items-center justify-center">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie data={[
-                        { name: "Online", value: 99.9 },
-                        { name: "Maintenance", value: 0.08 },
-                        { name: "Downtime", value: 0.02 },
-                      ]} cx="50%" cy="50%" innerRadius={35} outerRadius={55} dataKey="value" paddingAngle={2}>
-                        <Cell fill="hsl(142, 70%, 45%)" />
-                        <Cell fill="hsl(45, 90%, 50%)" />
-                        <Cell fill="hsl(0, 80%, 45%)" />
-                      </Pie>
-                      <Tooltip contentStyle={{ background: 'hsl(0, 0%, 10%)', border: '1px solid hsl(0, 0%, 20%)', borderRadius: 8, color: '#fff' }} formatter={(value: number) => `${value}%`} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Performance */}
-          <div className="max-w-4xl mx-auto mb-10">
-            <h2 className="text-xl font-bold text-foreground mb-4">Performance</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {perfCards.map((p) => (
-                <div key={p.label} className="glass-card p-4 text-center">
-                  <p className="text-sm text-muted-foreground mb-1">{p.label}</p>
-                  <p className="text-2xl font-bold text-foreground">{p.value}</p>
-                  {p.change && <p className={`text-xs ${p.color}`}>{p.change}</p>}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Services Status */}
-          <div className="max-w-4xl mx-auto mb-10">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-foreground">Services Status</h2>
-              <span className="text-xs text-noxx-green">All Operational</span>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {services.map((s) => (
-                <div key={s} className="glass-card p-3 flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-noxx-green" />
-                  <span className="text-sm text-foreground">{s}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Resource Usage */}
-          <div className="max-w-4xl mx-auto mb-10">
-            <h2 className="text-xl font-bold text-foreground mb-4">Resource Usage</h2>
-            <div className="grid md:grid-cols-3 gap-4">
-              {[
-                { label: "CPU Usage", value: 0 },
-                { label: "RAM Usage", value: 0 },
-                { label: "Disk Usage", value: 0 },
-              ].map((r) => (
-                <div key={r.label} className="glass-card p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm text-foreground">{r.label}</p>
-                    <p className="text-sm text-muted-foreground">{r.value}%</p>
-                  </div>
-                  <div className="w-full h-2 rounded-full bg-muted">
-                    <div className="h-2 rounded-full bg-noxx-red" style={{ width: `${r.value}%` }} />
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">100% max</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* VPS Info */}
-          <div className="max-w-4xl mx-auto mb-10">
-            <h2 className="text-xl font-bold text-foreground mb-4">VPS Infrastructure</h2>
+            <h2 className="text-xl font-bold text-foreground mb-4">Gateway Session Limit</h2>
             <div className="glass-card overflow-hidden">
               <table className="w-full">
                 <tbody>
-                  {vpsInfo.map((item, i) => (
-                    <tr key={item.label} className={i < vpsInfo.length - 1 ? "border-b border-border/30" : ""}>
-                      <td className="px-5 py-3 text-sm text-muted-foreground">{item.label}</td>
-                      <td className="px-5 py-3 text-sm text-foreground text-right">{item.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* System Info */}
-          <div className="max-w-4xl mx-auto mb-10">
-            <h2 className="text-xl font-bold text-foreground mb-4">System Information</h2>
-            <div className="glass-card overflow-hidden">
-              <table className="w-full">
-                <tbody>
-                  {sysInfo.map((item, i) => (
-                    <tr key={item.label} className={i < sysInfo.length - 1 ? "border-b border-border/30" : ""}>
+                  {[
+                    { label: "Total", value: sessionLimit?.total ?? "..." },
+                    { label: "Remaining", value: sessionLimit?.remaining ?? "..." },
+                    { label: "Max Concurrency", value: sessionLimit?.maxConcurrency ?? "..." },
+                    { label: "Reset After", value: sessionLimit ? formatResetAfter(sessionLimit.resetAfter) : "..." },
+                  ].map((item, i, arr) => (
+                    <tr key={item.label} className={i < arr.length - 1 ? "border-b border-border/30" : ""}>
                       <td className="px-5 py-3 text-sm text-muted-foreground">{item.label}</td>
                       <td className="px-5 py-3 text-sm text-foreground text-right font-mono">{item.value}</td>
                     </tr>
@@ -385,8 +130,55 @@ const Stats = () => {
             </div>
           </div>
 
+          {guildsSorted.length > 0 && (
+            <div className="max-w-4xl mx-auto mb-10">
+              <h2 className="text-xl font-bold text-foreground mb-4">Connected Servers ({guildsSorted.length})</h2>
+              <div className="glass-card overflow-hidden">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-border/50">
+                      <th className="text-left px-5 py-3 text-xs font-semibold text-muted-foreground">Server</th>
+                      <th className="text-left px-5 py-3 text-xs font-semibold text-muted-foreground">Members</th>
+                      <th className="text-left px-5 py-3 text-xs font-semibold text-muted-foreground">Owner</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {guildsSorted.map((guild, i) => (
+                      <tr key={guild.id} className={i < guildsSorted.length - 1 ? "border-b border-border/30" : ""}>
+                        <td className="px-5 py-3">
+                          <div className="flex items-center gap-3">
+                            {guild.icon ? (
+                              <img
+                                src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${guild.icon.startsWith("a_") ? "gif" : "png"}?size=32`}
+                                alt={guild.name}
+                                className="w-7 h-7 rounded-full"
+                              />
+                            ) : (
+                              <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground">
+                                {guild.name.charAt(0)}
+                              </div>
+                            )}
+                            <div>
+                              <p className="text-sm text-foreground">{guild.name}</p>
+                              <p className="text-[11px] text-muted-foreground font-mono">{guild.id}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-5 py-3 text-sm text-foreground">{guild.memberCount.toLocaleString()}</td>
+                        <td className="px-5 py-3 text-sm text-muted-foreground">{guild.owner ? "Yes" : "No"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
           <div className="text-center">
-            <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted border border-border text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
+            >
               ← Return Home
             </Link>
           </div>

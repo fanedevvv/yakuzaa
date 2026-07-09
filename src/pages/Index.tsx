@@ -37,6 +37,12 @@ const testimonials = [
 const Index = () => {
   const { data: botStats } = useDiscordBotStats();
   const { data: botCommands } = useDiscordBotCommands();
+  const botAvatarUrl = botStats?.bot?.avatar
+    ? `https://cdn.discordapp.com/avatars/${botStats.bot.id}/${botStats.bot.avatar}.png?size=256`
+    : YakuzaLogo;
+  const botTag = botStats?.bot
+    ? `${botStats.bot.username}${botStats.bot.discriminator !== "0" ? `#${botStats.bot.discriminator}` : ""}`
+    : "Loading bot profile...";
 
   return (
     <Layout>
@@ -74,6 +80,8 @@ const Index = () => {
             A powerful Discord bot that brings advanced features and seamless automation to your server.
           </motion.p>
 
+          <p className="text-sm text-muted-foreground mb-6">{botTag}</p>
+
           {/* Avatar with glow ring */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -83,11 +91,11 @@ const Index = () => {
           >
             <div className="absolute inset-0 rounded-full bg-noxx-red/20 blur-xl animate-pulse-glow" />
             <div className="w-36 h-36 mx-auto relative">
-              <img src={YakuzaLogo} alt="Yakuza Bot" className="w-full h-full object-contain relative z-10" />
+              <img src={botAvatarUrl} alt="Yakuza Bot" className="w-full h-full object-cover rounded-full relative z-10" />
             </div>
             <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 rounded-full bg-card/80 border border-border/50 backdrop-blur-sm z-20">
               <span className="w-2 h-2 rounded-full bg-noxx-green animate-pulse" />
-              <span className="text-xs text-muted-foreground">Online</span>
+              <span className="text-xs text-muted-foreground">Live API</span>
             </div>
           </motion.div>
 
