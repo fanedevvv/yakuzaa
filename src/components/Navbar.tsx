@@ -26,7 +26,7 @@ const navMenus: NavCategory[] = [
   {
     label: "Main",
     items: [
-      { label: "Dashboard", path: "https://dashboard.yakuza.my", icon: LayoutGrid, external: true },
+      { label: "Dashboard", path: "https://dash.rocobot.xyz", icon: LayoutGrid, external: true },
       { label: "Features", path: "/features", icon: Settings },
       { label: "Commands", path: "/commands", icon: Hash },
       { label: "Premium", path: "/premium", icon: Diamond },
@@ -213,7 +213,7 @@ const Navbar = () => {
             {user ? "Staff Panel" : "Staff Login"}
           </Link>
           <a
-            href="https://dashboard.yakuza.my"
+            href="https://dash.rocobot.xyz"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-muted text-foreground border border-border text-sm font-medium hover:bg-muted/80 transition-colors"
@@ -280,7 +280,7 @@ const Navbar = () => {
                   {user ? "Staff Panel" : "Staff Login"}
                 </Link>
                 <a
-                  href="https://dashboard.yakuza.my"
+                  href="https://dash.rocobot.xyz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-noxx-red/80 text-foreground text-sm font-semibold"
